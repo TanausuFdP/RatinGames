@@ -1,4 +1,4 @@
-package model;
+package es.ulpgc.ratingames.model;
 
 import java.util.List;
 

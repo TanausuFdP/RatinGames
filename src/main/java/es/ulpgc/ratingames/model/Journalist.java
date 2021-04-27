@@ -1,4 +1,4 @@
-package model;
+package es.ulpgc.ratingames.model;
 
 public class Journalist extends User {
     public Journalist(int id, String username, String password, String email) {

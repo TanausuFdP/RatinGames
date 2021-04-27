@@ -1,4 +1,4 @@
-package model;
+package es.ulpgc.ratingames.model;
 
 public class Player extends ForumUser {
     public Player(int id, String username, String password, String email) {

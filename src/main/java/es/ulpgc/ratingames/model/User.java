@@ -1,4 +1,4 @@
-package model;
+package es.ulpgc.ratingames.model;
 
 public abstract class User {
     private final int id;

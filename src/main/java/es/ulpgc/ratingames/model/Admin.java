@@ -1,4 +1,4 @@
-package model;
+package es.ulpgc.ratingames.model;
 
 public class Admin extends ForumUser {
     public Admin(int id, String username, String password, String email) {

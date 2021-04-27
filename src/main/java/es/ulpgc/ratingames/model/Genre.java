@@ -1,4 +1,4 @@
-package model;
+package es.ulpgc.ratingames.model;
 
 public enum Genre {
     SHOOTERS, ADVENTURE,ACTION,PlATFORMER, HORROR, SURVIVAL,

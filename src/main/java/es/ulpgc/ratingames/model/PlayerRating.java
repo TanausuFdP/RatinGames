@@ -1,4 +1,4 @@
-package model;
+package es.ulpgc.ratingames.model;
 
 public class PlayerRating {
     private int rating;

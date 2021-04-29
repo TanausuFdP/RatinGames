@@ -29,15 +29,13 @@
             <h1>Resultados:</h1>
 
 <%
-            while(rs.next()){
-                
                 out.println("<table class=\"center\">"
                         + "<tr>"
                         + "<th><h2>Titulo</h2></th>"
                         + "<th><h2>Studio</h2></th>"
                         + "</tr>");            
-            
-
+            while(rs.next()){
+                
                 out.println("<tr>"
                     + "<td>" + rs.getString("title") + "</td>"
                     + "<td>" + rs.getString("studio")+ "</td>"
@@ -50,9 +48,9 @@
                             
 
 
-                out.println("</table>");
                 
             }
+            out.println("</table>");
             
 
 

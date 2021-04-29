@@ -22,8 +22,9 @@
 
         
         ResultSet rs = s.executeQuery (sql);
-        
-            
+        Statement aux = conexion.createStatement();
+
+             
 %>
 
             <h1>Resultados:</h1>
@@ -33,19 +34,30 @@
                         + "<tr>"
                         + "<th><h2>Titulo</h2></th>"
                         + "<th><h2>Studio</h2></th>"
+                        + "<th><h2>Plataforma</h2></th>"
                         + "</tr>");            
             while(rs.next()){
                 
                 out.println("<tr>"
                     + "<td>" + rs.getString("title") + "</td>"
-                    + "<td>" + rs.getString("studio")+ "</td>"
-                    + "<td><form action=\"viewGame.jsp\">"
-                    + "<input type=\"hidden\" value=\"" + rs.getInt("id") + "\" name=\"gameID\"/>"                    
-                    + "<input type=\"hidden\" value=\"" + rs.getInt("platformId") + "\" name=\"platformID\"/>"
-                    + "<button>Ver juego</button>"
-                    + "</form></td>"
-                    + "</tr>");
+                    + "<td>" + rs.getString("studio")+ "</td>");
                             
+                    if(true){
+                        String platId = (String)rs.getString("platformId");
+                        sql = "SELECT  name "
+                                + "from  platform "
+                                + "where id = '"+ platId +"'";
+                        ResultSet rs1= aux.executeQuery (sql); rs1.next();
+                        out.println("<td>" + rs1.getString("name") + "</td>");
+
+                        out.println(""       
+                            + "<td><form action=\"viewGame.jsp\">"
+                            + "<input type=\"hidden\" value=\"" + rs.getInt("id") + "\" name=\"gameID\"/>"                    
+                            + "<input type=\"hidden\" value=\"" + rs1.getString("name") + "\" name=\"platformName\"/>"
+                            + "<button>Ver juego</button>"
+                            + "</form></td>");
+
+                    }
 
 
                 

@@ -20,6 +20,8 @@
 
 <%   
         String idGame = request.getParameter("gameID");
+        String pltName = request.getParameter("platformName");
+        
         User user = (User)session.getAttribute("User");
         if(user instanceof Player){
 
@@ -30,8 +32,6 @@
                     + "</form>");
         }  
         
-
-        String idPlatform = null;
         
         String sql = "SELECT * "
                 + "FROM game G "
@@ -42,10 +42,6 @@
             String gameID = rs.getString("id");
             session.setAttribute("SelectedgameID", gameID);
 
-
-
-
-            idPlatform = rs.getString("platformId");
             out.println("<table class=\"center\">"
                     + "<tr>"
                     + "<th><h2>Titulo</h2></th>"
@@ -54,6 +50,7 @@
                     + "<th><h2>Fecha de salida</h2></th>"
                     + "<th><h2>Idioma</h2></th>"
                     + "<th><h2>Restriccion de edad</h2></th>"
+                    + "<th><h2>Plataforma</h2></th>"
 
                     + "</tr>"); 
  
@@ -63,30 +60,14 @@
                     + "<td>" + rs.getString("players") + "</td>"
                     + "<td>" + rs.getString("releaseDate") + "</td>"
                     + "<td>" + rs.getString("language") + "</td>"
-                    + "<td>" + rs.getString("minimumAge")+ "</td>");
+                    + "<td>" + rs.getString("minimumAge")+ "</td>"
+                    + "<td>" + pltName + "</td>");
             
             out.println("</table>");
 
 
         }
 
-
-        // mostrando plataforma
-        System.out.println(idPlatform);
-        sql = "SELECT  name "
-                + "from  platform "
-                + "where id = '"+ idPlatform +"'";
-        rs = s.executeQuery (sql);
-
-        if(rs.next()){
-            out.println("<table class=\"center\">"
-                + "<tr>"
-                + "<th><h2>Plataforma</h2></th>"
-                + "</tr>"
-                + "<td>" + rs.getString("name") + "</td>"
-                + "</tr>");
-
-        }
 
             // mostrar los generos
         sql =   "SELECT  name "

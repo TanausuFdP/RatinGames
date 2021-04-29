@@ -29,7 +29,7 @@
                     + "<input type=\"submit\" value=\"Publicar mensaje\">"
                     + "</form>");
         }
-        
+
         String sql = "SELECT * "
                 + "FROM game G "
                 + "WHERE G.id = '"+ idGame +"'";

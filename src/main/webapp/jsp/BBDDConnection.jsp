@@ -7,7 +7,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>BD Conexion</title>
     </head>
     <body>
         <% 
@@ -16,7 +16,7 @@
             Connection conexion = null;
             Statement s = null;
             try{
-                conexion = DriverManager.getConnection ("jdbc:mysql://localhost:3307/ratingames","root", "admin");
+                conexion = DriverManager.getConnection ("jdbc:mysql://localhost:3307/ratingames","root", "");
                 s = conexion.createStatement();
                 
             }catch(SQLException ex){

@@ -51,13 +51,13 @@
                     + "and P.id = G.platformId";
                 rs= s.executeQuery(sql); rs.next();
                 out.println("<form action=\"viewGame.jsp\">"
-                + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"                    
+                + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
                 + "<input type=\"hidden\" value=\"" + rs.getString("name") + "\" name=\"platformName\"/>"
                 + "<input type=\"submit\" value=\"Volver al juego\">"
                 + "</form>");
                 %>
         </div>
-        <%      
+        <%
         // guardamos mensaje en la BBDD
         User user = (User)session.getAttribute("User");
         Integer userId = (Integer)session.getAttribute("UserID");
@@ -78,12 +78,12 @@
 
                 }catch(SQLException e){
                     out.println("<h2 class=\"bad\">ERROR AL PUBLICAR MENSAJE</h2>");
-                }        
+                }
             }
         }else if(user instanceof Admin){
             // si es admin...
         }
-        
+
         s.close();
         conexion.close();
         %>

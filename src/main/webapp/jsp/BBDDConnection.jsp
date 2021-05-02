@@ -9,20 +9,20 @@
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-    <body>
+    <body>--!>
         <% 
             
             Class.forName("com.mysql.jdbc.Driver");
             Connection conexion = null;
             Statement s = null;
             try{
-                conexion = DriverManager.getConnection ("jdbc:mysql://localhost:3307/ratingames","root", "admin");
+                conexion = DriverManager.getConnection ("jdbc:mysql://localhost:3306/ratingames","root", "admin");
                 s = conexion.createStatement();
                 
             }catch(SQLException ex){
@@ -32,5 +32,5 @@
 
         %>
 
-    </body>
-</html>
+    <!--</body>
+</html>--!>

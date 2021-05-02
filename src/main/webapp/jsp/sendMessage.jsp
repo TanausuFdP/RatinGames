@@ -67,8 +67,14 @@
 
                 try{
                     Integer res = s.executeUpdate("INSERT INTO message (discussionId, userId, body,date)"
-                        + " VALUES ('" +idDiscusion + "', '" + userId + "', '" + subjt +"', '" + LocalDateTime.now() + "')");               
-                    if(res > 0)out.println("<h2 class=\"good\">Mensaje publicado, se supone que tiene que direccionar directamente al foro</h2>");
+                        + " VALUES ('" +idDiscusion + "', '" + userId + "', '" + subjt +"', '" + LocalDateTime.now() + "')");
+                    if(res > 0){
+                        out.println("Mensaje publicado.");
+                        out.println("<form action=\"viewMessages.jsp\">"
+                            + "<input type=\"hidden\" value=\"" + idDiscusion + "\" name=\"discussion\"/>"
+                            + "<input type=\"submit\" value=\"Ver mensajes\">"
+                            + "</form>");
+                    }
 
                 }catch(SQLException e){
                     out.println("<h2 class=\"bad\">ERROR AL PUBLICAR MENSAJE</h2>");

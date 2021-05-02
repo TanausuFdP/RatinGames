@@ -84,9 +84,9 @@
                             + "<input type=\"submit\" value=\"Ver mensajes\">"
                             + "</form>"
                             + "</td>");
-                    minReg++;
                     if(minReg != maxReg)
                         rs.next();
+                    minReg++;
                 }
                 out.println("</table>");
                 %>

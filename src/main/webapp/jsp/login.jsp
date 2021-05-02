@@ -3,6 +3,8 @@
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
+<%@page import="es.ulpgc.ratingames.model.Player"%>
+<%@page import="es.ulpgc.ratingames.model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -56,6 +58,12 @@
         
         <% 
 
+            if (session.getAttribute("User") != null) {
+                session.setAttribute("User",null);
+                session.setAttribute("UserID",null);
+                response.sendRedirect("index.jsp");
+            }
+
             String username = request.getParameter("uname");
             String password = request.getParameter("psw");
             String correo = request.getParameter("correo");
@@ -66,7 +74,11 @@
                         username + "' and password=" + "'" + password + "'");
 
                 if(rs.next()){
-                    response.sendRedirect("home.jsp");
+                    
+                    User user = new Player(rs.getInt("Id"),rs.getString("username"),rs.getString("password"),rs.getString("email"));
+                    session.setAttribute("User", user);
+                    session.setAttribute("UserID", rs.getInt("Id"));
+                    response.sendRedirect("index.jsp");
                 }else{
                     out.println("<h1 class=\"bad\">ERROR DE AUTENTIFICACION.</hi>");  
                 }
@@ -82,6 +94,7 @@
                     out.println("<h1 class=\"bad\">ERROR AL REGISTRAR USUARIO.</h1>");
                 }
             }
+            s.close();
             conexion.close();
         %>
 

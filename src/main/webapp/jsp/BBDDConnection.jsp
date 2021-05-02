@@ -1,9 +1,3 @@
-<%-- 
-    Document   : BBDDConnection
-    Created on : 26-abr-2021, 12:24:08
-    Author     : gabriel_hijo
---%>
-
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.DriverManager"%>

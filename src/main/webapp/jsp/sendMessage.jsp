@@ -18,7 +18,7 @@
     <body>
         <%@include file="header.jsp"%>
         <%@include file="BBDDConnection.jsp"%>
-        
+
         <%
         String gameID = (String)session.getAttribute("SelectedgameID");
         %>
@@ -28,7 +28,7 @@
             <form action="sendMessage.jsp">   
                 <input type="hidden" name="valor" value="0"/>
                 <select onchange="this.form.valor.value = this.value;">
-                <%        
+                <%
                 String sql = "SELECT * "
                         + "FROM discussion "
                         + "where gameId = "+ gameID;

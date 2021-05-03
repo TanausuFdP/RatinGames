@@ -201,3 +201,63 @@ small{
     height: 100px;
     margin-top: -100px;
 }
+
+/*RATING*/
+
+.rating{
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 100pt;
+    margin-top: 80pt;
+    width: 500pt;
+    background-color: #3D5A80;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.rating h3{
+    text-align: center;
+    padding-top: 20pt;
+    margin-bottom: 0;
+}
+
+.rating form{
+    padding-top: 40pt;
+    padding-bottom: 20pt;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.rating p{
+    color: white;
+    font-weight: bold;
+    font-size: 12pt;
+    margin: 2pt;
+}
+
+.rating input{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 0;
+}
+
+.rating textarea{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    border-radius: 5px;
+}
+
+.rating input[type=submit]{
+    background-color: #98C1D9;
+}
+
+.rating input[type=submit]:hover{
+    background-color: #EE6C4D;
+    color: white;
+}

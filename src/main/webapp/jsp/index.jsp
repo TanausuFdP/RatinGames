@@ -44,7 +44,7 @@
 </div>
 
 <div class="topForum">
-    <h3>?LTIMOS MENSAJES DEL FORO</h3>
+    <h3>ÚLTIMOS MENSAJES DEL FORO</h3>
     <%
         out.println("<ul>");
         for (int i = 0; i < 5; i++) {

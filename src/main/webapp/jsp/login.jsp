@@ -45,7 +45,7 @@
                 <button class="ghost" id="signIn">Iniciar sesión</button>
             </div>
             <div class="overlay-panel overlay-right">
-                <h1>Nuevo ingreso?</h1>
+                <h1>¿Nuevo ingreso?</h1>
 
                 <button class="ghost" id="signUp">Registrarse</button>
             </div>

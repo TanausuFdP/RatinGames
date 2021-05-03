@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <title>RatinGames</title>
     <link rel="stylesheet" href="../css-files/styles.css">
-		<link rel="stylesheet" href="../css-files/addGame.css">
+    <link rel="stylesheet" href="../css-files/addGame.css">
 </head>
 <body>
 <div class="topBar">

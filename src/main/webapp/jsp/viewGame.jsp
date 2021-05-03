@@ -4,17 +4,17 @@
 <%@page import="es.ulpgc.ratingames.model.Player" %>
 <%@page import="es.ulpgc.ratingames.model.User" %>
 <%@include file="BBDDConnection.jsp" %>
+<%@include file="header.jsp" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <link rel="stylesheet" href="../css-files/searchGames.css">
-<div class="results">
-    <%@include file="header.jsp" %>
+<div class="gameView">
     <link rel="stylesheet" href="../css-files/message.css">
 
     <%        out.println("<br> <br>");
     %>
-    <h1>Videojuego seleccionado:</h1>
+    <h1>Videojuego seleccionado</h1>
     <%
         String idGame = request.getParameter("gameID");
         String pltName = request.getParameter("platformName");
@@ -34,12 +34,14 @@
                 out.println("<table class=\"center\">"
                         + "<tr>"
                         + "<th><h2>Titulo</h2></th>"
-                        + "<th><h2>Studio</h2></th>"
+                        + "<th><h2>Estudio</h2></th>"
                         + "<th><h2>Jugadores</h2></th>"
                         + "<th><h2>Fecha de salida</h2></th>"
                         + "<th><h2>Idioma</h2></th>"
-                        + "<th><h2>Restriccion de edad</h2></th>"
+                        + "<th><h2>Restricción de edad</h2></th>"
                         + "<th><h2>Plataforma</h2></th>"
+                        + "<th><h2>Géneros</h2></th>"
+                        + "<th><h2>Valoración</h2></th>"
                         + "</tr>");
 
                 out.println("<tr>"
@@ -50,7 +52,6 @@
                         + "<td>" + rs.getString("language") + "</td>"
                         + "<td>" + rs.getString("minimumAge") + "</td>"
                         + "<td>" + pltName + "</td>");
-                out.println("</tr></table>");
             }
         } catch (SQLException exc) {
             exc.printStackTrace();
@@ -68,20 +69,15 @@
             exc.printStackTrace();
         }
 
-        out.println("<table class=\"center\">"
-                + "<tr>"
-                + "<th><h2>Generos</h2></th>"
-                + "</tr>");
         try {
+            String genres = "";
             while (rs.next()) {
-                out.println("<tr>"
-                        + "<td>" + rs.getString("name") + "</td>"
-                        + "</tr>");
+                genres += rs.getString("name") + ", ";
             }
+            out.println("<td>" + genres.substring(0, genres.lastIndexOf(",")) + "</td>");
         } catch (SQLException exc) {
             exc.printStackTrace();
         }
-        out.println("</table>");
 
         sql = "SELECT  rating "
                 + "FROM rating "
@@ -89,11 +85,6 @@
                 + "AND gameId = '" + idGame + "'";
 
         rs = s.executeQuery(sql);
-        out.println("<table class=\"center\">"
-                + "<tr>"
-                + "<th><h2>Valoración</h2></th>"
-                + "</tr>");
-
         DecimalFormatSymbols separadoresPersonalizados = new DecimalFormatSymbols();
         separadoresPersonalizados.setDecimalSeparator('.');
         DecimalFormat format = new DecimalFormat("#.##");
@@ -106,24 +97,20 @@
             media += Float.parseFloat(rs.getString("rating"));
         }
         media = media / n;
-        out.println("<tr>"
-                + "<td>" + format.format(media) + "</td>"
+        out.println("<td>" + format.format(media) + "</td>"
                 + "</tr>"
                 + "</table>");
     %>
 </div>
-<div>
+<div class="gameButtons">
     <%
         if (user instanceof Player) {
-
             out.println("<form action=\"sendMessage.jsp\">"
                     + "<input type=\"hidden\" value=\"" + idGame + "\" name=\"gameID\"/>"
                     + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
                     + "<input type=\"submit\" value=\"Publicar mensaje\">"
                     + "</form>");
         }
-        out.println("<br>");
-
         out.println("<form action=\"forum.jsp\">"
                 + "<input type=\"hidden\" value=\"" + idGame + "\" name=\"gameID\"/>"
                 + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"

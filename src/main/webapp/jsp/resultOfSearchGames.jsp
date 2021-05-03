@@ -1,16 +1,11 @@
 <%@page import="java.sql.ResultSet" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@include file="BBDDConnection.jsp" %>
+<%@include file="header.jsp" %>
 
 <!DOCTYPE html>
 <link rel="stylesheet" href="../css-files/searchGames.css">
 <div class="results">
-    <%@include file="header.jsp" %>
-    <form class="form-search" autocomplete="off" action="searchGames" method="get">
-        <input type=text placeholder="Buscar juegos" name="search_games">
-        <input type="hidden" name="command" value="Search">
-        <button type="submit"><i class="fa fa-search"></i></button>
-    </form>
     <%
         String search = request.getParameter("search_games").toLowerCase();
         String sql = "SELECT * FROM game WHERE game.title LIKE '%" + search + "%'";
@@ -26,7 +21,7 @@
         }
     %>
 
-    <h1>Resultados:</h1>
+    <h1>RESULTADOS</h1>
 
     <%
         out.println("<table class=\"center\">"
@@ -34,6 +29,7 @@
                 + "<th><h2>Titulo</h2></th>"
                 + "<th><h2>Studio</h2></th>"
                 + "<th><h2>Plataforma</h2></th>"
+                + "<th></th>"
                 + "</tr>");
         try {
             while (rs.next()) {

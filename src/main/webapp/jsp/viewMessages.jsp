@@ -24,7 +24,7 @@
                 + "WHERE M.discussionId = '" + discussionID + "'";
 
         ResultSet rs = null;
-        int regs;
+        int regs = 0;
         try {
             rs = s.executeQuery(sql);
             rs.last();
@@ -54,10 +54,14 @@
         session.setAttribute("pageMessages", actualPage);
 
         int minReg = 1 + (10 * actualPage);
-        if (minReg == 1) {
-            rs.first();
-        } else {
-            rs.absolute(minReg);
+        try {
+            if (minReg == 1) {
+                rs.first();
+            } else {
+                rs.absolute(minReg);
+            }
+        } catch (SQLException exception) {
+            exception.printStackTrace();
         }
 
         out.println("<table class=\"center\">"

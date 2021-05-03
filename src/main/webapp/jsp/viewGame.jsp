@@ -57,8 +57,8 @@
                         + "<td>" + pltName + "</td>");
                 out.println("</tr></table>");
             }
-        } catch (SQLException exception) {
-            exception.printStackTrace();
+        } catch (SQLException exc) {
+            exc.printStackTrace();
         }
 
 
@@ -70,8 +70,8 @@
                 + "where gameId = " + idGame + ")";
         try {
             rs = s.executeQuery(sql);
-        } catch (SQLException exception) {
-            exception.printStackTrace();
+        } catch (SQLException exc) {
+            exc.printStackTrace();
         }
 
         out.println("<table class=\"center\">"
@@ -84,15 +84,15 @@
                         + "<td>" + rs.getString("name") + "</td>"
                         + "</tr>");
             }
-        } catch (SQLException exception) {
-            exception.printStackTrace();
+        } catch (SQLException exc) {
+            exc.printStackTrace();
         }
         out.println("</table>");
         try {
             s.close();
             conexion.close();
-        } catch (SQLException exception) {
-            exception.printStackTrace();
+        } catch (SQLException exc) {
+            exc.printStackTrace();
         }
     %>
 </div>

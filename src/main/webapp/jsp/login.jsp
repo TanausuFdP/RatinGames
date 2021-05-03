@@ -71,8 +71,8 @@
         try {
             rs = s.executeQuery("SELECT*FROM user where username=" + "'" +
                     username + "' and password=" + "'" + password + "'");
-        } catch (SQLException exception) {
-            exception.printStackTrace();
+        } catch (SQLException exc) {
+            exc.printStackTrace();
         }
 
         try {
@@ -85,8 +85,8 @@
             } else {
                 out.println("<h1 class=\"bad\">ERROR DE AUTENTIFICACION.</hi>");
             }
-        } catch (SQLException exception) {
-            exception.printStackTrace();
+        } catch (SQLException exc) {
+            exc.printStackTrace();
         }
     }
 
@@ -103,8 +103,8 @@
     try {
         s.close();
         conexion.close();
-    } catch (SQLException exception) {
-        exception.printStackTrace();
+    } catch (SQLException exc) {
+        exc.printStackTrace();
     }
 %>
 

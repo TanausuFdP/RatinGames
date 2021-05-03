@@ -24,7 +24,7 @@
 <h3>Escribir en el foro</h3>
 <div class="container">
     <form action="sendMessage.jsp">
-        <input type="hidden" name="valor" value="0"/>
+        <input type="hidden" name="valor" value="1"/>
         <select onchange="this.form.valor.value = this.value;">
             <%
                 String sql = "SELECT * "
@@ -34,12 +34,11 @@
                 ResultSet rs = null;
                 try {
                     rs = s.executeQuery(sql);
-                    out.println("<option selected>" + "Selecciona discusión" + "</option>");
                     while (rs.next()) {
                         out.println("<option value = " + rs.getString("id") + ">" + rs.getString("subject") + "</option>");
                     }
-                } catch (SQLException exception) {
-                    exception.printStackTrace();
+                } catch (SQLException exc) {
+                    exc.printStackTrace();
                 }
             %>
         </select>
@@ -61,8 +60,8 @@
                     + "<input type=\"hidden\" value=\"" + rs.getString("name") + "\" name=\"platformName\"/>"
                     + "<input type=\"submit\" value=\"Volver al juego\">"
                     + "</form>");
-        } catch (SQLException exception) {
-            exception.printStackTrace();
+        } catch (SQLException exc) {
+            exc.printStackTrace();
         }
     %>
 </div>
@@ -95,8 +94,8 @@
     try {
         s.close();
         conexion.close();
-    } catch (SQLException exception) {
-        exception.printStackTrace();
+    } catch (SQLException exc) {
+        exc.printStackTrace();
     }
 %>
 </body>

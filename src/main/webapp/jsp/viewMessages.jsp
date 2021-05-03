@@ -30,8 +30,8 @@
             rs = s.executeQuery(sql);
             rs.last();
             regs = rs.getRow();
-        } catch (SQLException exception) {
-            exception.printStackTrace();
+        } catch (SQLException exc) {
+            exc.printStackTrace();
         }
 
 
@@ -61,8 +61,8 @@
             } else {
                 rs.absolute(minReg);
             }
-        } catch (SQLException exception) {
-            exception.printStackTrace();
+        } catch (SQLException exc) {
+            exc.printStackTrace();
         }
 
         out.println("<table class=\"center\">"
@@ -88,8 +88,8 @@
                 if (minReg != maxReg)
                     rs.next();
             }
-        } catch (SQLException exception) {
-            exception.printStackTrace();
+        } catch (SQLException exc) {
+            exc.printStackTrace();
         }
         out.println("</table>");
 
@@ -124,8 +124,8 @@
                     + "<input type=\"hidden\" value=\"" + rs.getInt("gameId") + "\" name=\"game\"/>"
                     + "<input type=\"submit\" value=\"Volver al foro\">"
                     + "</form>");
-        } catch (SQLException exception) {
-            exception.printStackTrace();
+        } catch (SQLException exc) {
+            exc.printStackTrace();
         }
     %>
 </div>

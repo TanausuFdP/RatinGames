@@ -21,8 +21,8 @@
         try {
             rs = s.executeQuery(sql);
             aux = conexion.createStatement();
-        } catch (SQLException exception) {
-            exception.printStackTrace();
+        } catch (SQLException exc) {
+            exc.printStackTrace();
         }
     %>
 
@@ -60,8 +60,8 @@
             out.println("</table>");
             s.close();
             conexion.close();
-        } catch (SQLException exception) {
-            exception.printStackTrace();
+        } catch (SQLException exc) {
+            exc.printStackTrace();
         }
 
 

@@ -22,7 +22,7 @@
             Connection conexion = null;
             Statement s = null;
             try{
-                conexion = DriverManager.getConnection ("jdbc:mysql://localhost:3306/ratingames","root", "");
+                conexion = DriverManager.getConnection ("jdbc:mysql://localhost:3307/ratingames","root", "");
                 s = conexion.createStatement();
                 
             }catch(SQLException ex){

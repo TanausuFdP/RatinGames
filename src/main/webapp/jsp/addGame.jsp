@@ -1,19 +1,21 @@
+<%@page import="java.util.Arrays"%>
 <%@page import="java.sql.ResultSet"%>
 <jsp:include page="header.jsp"/>
 <%@include file="BBDDConnection.jsp"%>
 
 <div>
-    <form class="form" method="POST" name="addGameForm" action="addGame.jsp">
+    <form class="form" method="POST" action="addGame.jsp">
+        <input type="hidden" name="addGameForm" value="true">
         <label>Título</label>
         <input type="text" name="title" placeholder="Título" required>
         <label>Estudio</label>
         <input type="text" name="studio" placeholder="Estudio" required>
         <label>Jugadores</label>
         <input type="text" name="players" placeholder="Jugadores" required>
-        <label>Fecha de salida</label>
-        <input type="date" name="releaseDate">
         <label>Edad mínima</label>
         <input type="number" name="minimumAge" placeholder="Edad mínima">
+        <label>Fecha de salida</label>
+        <input type="date" name="releaseDate">
         <label>Idiomas</label>
         <table>
             <tbody>
@@ -74,11 +76,15 @@
         if (languagesArray == null) {
             languages = "Desconocido";
         } else {
-            languages = languagesArray.toString();
+            languages = Arrays.toString(languagesArray).replace("[", "").replace("]", "");
         }
-        String sqlSentence = String.format("INSERT INTO games (title, studio, players, releaseDate, language, minimumAge, plataformId)"
-                + " VALUES (%s,%s,%s,%s,%s,%d,%d)", title, studio, players, releaseDate, languages, minimumAge, platformId);
-        s.executeUpdate(sqlSentence);
+        String sqlSentence = String.format("INSERT INTO game (title, studio, players, releaseDate, language, minimumAge, platformId)"
+                + " VALUES ('%s','%s','%s','%s','%s',%d,%d)", title, studio, players, releaseDate, languages, minimumAge, platformId);
+        try{
+            s.executeUpdate(sqlSentence);
+        } catch(SQLException ex){
+            out.println("<h2 class=\"bad\">ERROR AL PUBLICAR MENSAJE</h2>");
+        }
     }
 
 %>

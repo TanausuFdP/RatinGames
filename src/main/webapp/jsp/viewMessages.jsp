@@ -84,9 +84,10 @@
                 out.println("<tr>"
                         + "<td>" + rs.getString("body") + "</td>"
                         + "<td>" + rs.getString("date") + "</td>");
-                minReg++;
+                
                 if (minReg != maxReg)
                     rs.next();
+                minReg++;
             }
         } catch (SQLException exc) {
             exc.printStackTrace();

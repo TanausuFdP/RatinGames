@@ -15,58 +15,46 @@
         <label>Edad mínima</label>
         <input type="number" name="minimumAge" placeholder="Edad mínima">
         <label>Idiomas</label>
-        <!--<div style="display: inline-block">-->
-            <div style="inline">
-                <label>Inglés</label>
-                <input type="checkbox" name="language" value="EN">
-            </div>
-            <div style="inline">
-                <label>Francés</label>
-                <input type="checkbox" name="language" value="FR">
-            </div>
-            <div style="inline">
-                <label>Alemán</label>
-                <input type="checkbox" name="language" value="DE">
-            </div>
-            <div style="inline">
-                <label>Español</label>
-                <input type="checkbox" name="language" value="ES">
-            </div>
-            <div style="inline">
-                <label>Italiano</label>
-                <input type="checkbox" name="language" value="IT">
-            </div>
-            <div style="inline">
-                <label>Portugés</label>
-                <input type="checkbox" name="language" value="PT">
-            </div>
-            <div style="inline">
-                <label>Ruso</label>
-                <input type="checkbox" name="language" value="RU">
-            </div>
-            <div style="inline">
-                <label>Japonés</label>
-                <input type="checkbox" name="language" value="JA">
-            </div>
-            <div style="inline">
-                <label>Chino</label>
-                <input type="checkbox" name="language" value="ZH">
-            </div>
-            <div style="inline">
-                <label>Coreano</label>
-                <input type="checkbox" name="language" value="KO">
-            </div>
-        <!--</div>-->
+        <table>
+            <tbody>
+                <tr>
+                    <td><label>Inglés</label></td>
+                    <td><input type="checkbox" name="language" value="EN"></td>
+                    <td><label>Francés</label></td>
+                    <td><input type="checkbox" name="language" value="FR"></td>
+                    <td><label>Alemán</label></td>
+                    <td><input type="checkbox" name="language" value="DE"></td>
+                </tr>
+                <tr>
+                    <td><label>Español</label></td>
+                    <td><input type="checkbox" name="language" value="ES"></td>
+                    <td><label>Italiano</label></td>
+                    <td><input type="checkbox" name="language" value="IT"></td>
+                    <td><label>Portugés</label></td>
+                    <td><input type="checkbox" name="language" value="PT"></td>
+                </tr>
+                <tr>
+                    <td><label>Ruso</label></td>
+                    <td><input type="checkbox" name="language" value="RU"></td>
+                    <td><label>Japonés</label></td>
+                    <td><input type="checkbox" name="language" value="JA"></td>
+                    <td><label>Chino</label></td>
+                    <td><input type="checkbox" name="language" value="ZH"></td>
+                </tr>
+                <tr>
+                    <td><label>Coreano</label></td>
+                    <td><input type="checkbox" name="language" value="KO"></td>
+                </tr>
+            </tbody>
+        </table>
         <label>Plataforma</label>
-        <select name="platformId" required>
-            <%            String sql = "SELECT * "
-                        + "FROM platform";
-                //ResultSet rs = s.executeQuery(sql);
-                out.println("<option selected>" + "Seleccione plataforma" + "</option>");
-                /*while (rs.next()) {*/
-                out.println("<option value = " + /*rs.getString("id")*/ 1 + ">" + /*rs.getString("name")*/ "PC" + "</option>");
-
-                //}
+        <select name="platformId">
+            <%  
+                String sql = "SELECT * " + "FROM platform";
+                ResultSet rs = s.executeQuery(sql);
+                while (rs.next()) {
+                    out.println("<option value = " + rs.getString("id") + ">" + rs.getString("name") + "</option>");
+                }
             %>
         </select>
         <input type="submit" value="Añadir">
@@ -94,5 +82,3 @@
     }
 
 %>
-
-<jsp:include page="footer.jsp"/>

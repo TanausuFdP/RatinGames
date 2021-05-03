@@ -15,6 +15,7 @@
     <br> <br>
     <h1>Mensajes:</h1>
     <%
+        int regsPerPage = 10;
         String discussionID = request.getParameter("discussion");
         String anterior = request.getParameter("anterior");
         String siguiente = request.getParameter("siguiente");
@@ -35,10 +36,10 @@
 
 
         int maxPages;
-        if (regs % 10 == 0) {
-            maxPages = regs / 10;
+        if (regs % regsPerPage == 0) {
+            maxPages = regs / regsPerPage;
         } else {
-            maxPages = (regs / 10) + 1;
+            maxPages = (regs / regsPerPage) + 1;
         }
 
         Integer actualPage = (Integer) session.getAttribute("pageMessages");
@@ -53,7 +54,7 @@
         }
         session.setAttribute("pageMessages", actualPage);
 
-        int minReg = 1 + (10 * actualPage);
+        int minReg = 1 + (regsPerPage * actualPage);
         try {
             if (minReg == 1) {
                 rs.first();
@@ -71,8 +72,8 @@
                 + "</tr>");
 
         int maxReg = regs;
-        if ((10 * actualPage) + 10 < regs) {
-            maxReg = (10 * actualPage) + 10;
+        if ((regsPerPage * actualPage) + regsPerPage < regs) {
+            maxReg = (regsPerPage * actualPage) + regsPerPage;
         }
 
         try {
@@ -83,9 +84,9 @@
                 out.println("<tr>"
                         + "<td>" + rs.getString("body") + "</td>"
                         + "<td>" + rs.getString("date") + "</td>");
+                minReg++;
                 if (minReg != maxReg)
                     rs.next();
-                minReg++;
             }
         } catch (SQLException exception) {
             exception.printStackTrace();

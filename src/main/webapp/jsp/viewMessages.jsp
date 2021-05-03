@@ -17,6 +17,8 @@
     <%
         int regsPerPage = 10;
         String discussionID = request.getParameter("discussion");
+        String gameID = request.getParameter("gameID");
+        String pltName = request.getParameter("platformName");
         String anterior = request.getParameter("anterior");
         String siguiente = request.getParameter("siguiente");
 
@@ -100,6 +102,8 @@
             if (actualPage != 0) {
                 out.println("<form action=\"viewMessages.jsp\">"
                         + "<input type=\"hidden\" value=\"" + discussionID + "\" name=\"discussion\"/>"
+                        + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
+                        + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
                         + "<input type=\"hidden\" value=\"True\" name=\"anterior\"/>"
                         + "<input type=\"submit\" value=\"Anterior\">"
                         + "</form>");
@@ -108,6 +112,8 @@
             if (actualPage != maxPages - 1) {
                 out.println("<form action=\"viewMessages.jsp\">"
                         + "<input type=\"hidden\" value=\"" + discussionID + "\" name=\"discussion\"/>"
+                        + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
+                        + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
                         + "<input type=\"hidden\" value=\"True\" name=\"siguiente\"/>"
                         + "<input type=\"submit\" value=\"Siguiente\">"
                         + "</form>");
@@ -115,19 +121,11 @@
         %>
     </div>
     <%
-        sql = "SELECT  gameId "
-                + "from  discussion D "
-                + "where D.id = '" + discussionID + "'";
-        try {
-            rs = s.executeQuery(sql);
-            rs.next();
-            out.println("<form action=\"forum.jsp\">"
-                    + "<input type=\"hidden\" value=\"" + rs.getInt("gameId") + "\" name=\"game\"/>"
-                    + "<input type=\"submit\" value=\"Volver al foro\">"
-                    + "</form>");
-        } catch (SQLException exc) {
-            exc.printStackTrace();
-        }
+        out.println("<form action=\"forum.jsp\">"
+                + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
+                + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
+                + "<input type=\"submit\" value=\"Volver al foro\">"
+                + "</form>");
     %>
 </div>
 </body>

@@ -17,7 +17,8 @@
 <%@include file="BBDDConnection.jsp" %>
 
 <%
-    String gameID = (String) session.getAttribute("SelectedgameID");
+    String gameID = request.getParameter("gameID");
+    String pltName = request.getParameter("platformName");
 %>
 
 
@@ -47,22 +48,11 @@
         <input type="submit" value="Submit">
     </form>
     <%
-        out.println("<br>");
-        sql = "SELECT  P.name "
-                + "from  platform P, game G "
-                + "where G.id = '" + gameID + "'"
-                + "and P.id = G.platformId";
-        try {
-            rs = s.executeQuery(sql);
-            rs.next();
-            out.println("<form action=\"viewGame.jsp\">"
-                    + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
-                    + "<input type=\"hidden\" value=\"" + rs.getString("name") + "\" name=\"platformName\"/>"
-                    + "<input type=\"submit\" value=\"Volver al juego\">"
-                    + "</form>");
-        } catch (SQLException exc) {
-            exc.printStackTrace();
-        }
+        out.println("<form action=\"viewGame.jsp\">"
+                + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
+                + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
+                + "<input type=\"submit\" value=\"Volver al juego\">"
+                + "</form>");
     %>
 </div>
 <%
@@ -79,6 +69,8 @@
                     out.println("Mensaje publicado.");
                     out.println("<form action=\"viewMessages.jsp\">"
                             + "<input type=\"hidden\" value=\"" + idDiscusion + "\" name=\"discussion\"/>"
+                            + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
+                            + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
                             + "<input type=\"submit\" value=\"Ver mensajes\">"
                             + "</form>");
                 }

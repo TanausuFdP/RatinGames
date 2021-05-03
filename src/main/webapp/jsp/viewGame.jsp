@@ -1,3 +1,5 @@
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="java.text.DecimalFormatSymbols"%>
 <%@page import="java.sql.ResultSet" %>
 <%@page import="es.ulpgc.ratingames.model.Player" %>
 <%@page import="es.ulpgc.ratingames.model.User" %>
@@ -17,6 +19,7 @@
     <%
         String idGame = request.getParameter("gameID");
         String pltName = request.getParameter("platformName");
+        session.setAttribute("pageForum", null);
 
         User user = (User) session.getAttribute("User");
         String sql = "SELECT * "
@@ -87,6 +90,37 @@
         } catch (SQLException exc) {
             exc.printStackTrace();
         }
+        
+        sql =   "SELECT  rating "
+                    + "FROM rating "
+                    + "WHERE ratingType = 0 "
+                    + "AND gameId = '"+ idGame +"'";
+        
+        rs = s.executeQuery (sql);
+            out.println("<table class=\"center\">"
+                    + "<tr>"
+                    + "<th><h2>Valoración</h2></th>"
+                    + "</tr>"); 
+          
+            
+            
+        DecimalFormatSymbols separadoresPersonalizados = new DecimalFormatSymbols();
+        separadoresPersonalizados.setDecimalSeparator('.');  
+        DecimalFormat format = new DecimalFormat("#.##");
+        
+        float  media = 0;
+        int n = 0;
+        
+
+        while(rs.next()){
+            n++;
+            media += Float.parseFloat(rs.getString("rating"));
+        }
+        media = media / n;
+                out.println("<tr>"
+                    + "<td>" + format.format(media) + "</td>"
+                    + "</tr>"
+                    + "</table>");
     %>
 </div>
 <div>
@@ -94,16 +128,21 @@
         if (user instanceof Player) {
 
             out.println("<form action=\"sendMessage.jsp\">"
-                    + "<input type=\"hidden\" value=\"" + idGame + "\" name=\"game\"/>"
+                    + "<input type=\"hidden\" value=\"" + idGame + "\" name=\"gameID\"/>"
                     + "<input type=\"submit\" value=\"Publicar mensaje\">"
                     + "</form>");
         }
         out.println("<br>");
 
         out.println("<form action=\"forum.jsp\">"
-                + "<input type=\"hidden\" value=\"" + idGame + "\" name=\"game\"/>"
+                + "<input type=\"hidden\" value=\"" + idGame + "\" name=\"gameID\"/>"
                 + "<input type=\"submit\" value=\"Ver foro\">"
                 + "</form>");
+        
+        out.println("<form action=\"rating.jsp\">"
+                    + "<input type=\"hidden\" value=\"" + idGame + "\" name=\"gameID\"/>"
+                    + "<input type=\"submit\" value=\"Valorar\">"
+                    + "</form>");
     %>
 </div>
 </body>

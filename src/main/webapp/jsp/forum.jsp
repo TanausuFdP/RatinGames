@@ -15,7 +15,8 @@
     <br> <br>
     <h1>Discusiones del foro:</h1>
     <%
-        String gameID = request.getParameter("game");
+        String gameID = request.getParameter("gameID");
+        String pltName = request.getParameter("platformName");
         String anterior = request.getParameter("anterior");
         String siguiente = request.getParameter("siguiente");
         session.setAttribute("pageMessages", null);
@@ -75,6 +76,8 @@
                     + "<td>"
                     + "<form action=\"viewMessages.jsp\">"
                     + "<input type=\"hidden\" value=\"" + rs.getString("id") + "\" name=\"discussion\"/>"
+                    + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
+                    + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
                     + "<input type=\"submit\" value=\"Ver mensajes\">"
                     + "</form>"
                     + "</td>");
@@ -88,7 +91,8 @@
         <%
             if (actualPage != 0) {
                 out.println("<form action=\"forum.jsp\">"
-                        + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"game\"/>"
+                        + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
+                        + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
                         + "<input type=\"hidden\" value=\"True\" name=\"anterior\"/>"
                         + "<input type=\"submit\" value=\"Anterior\">"
                         + "</form>");
@@ -96,7 +100,8 @@
             out.println("Pagina actual: " + (actualPage + 1));
             if (actualPage != maxPages - 1) {
                 out.println("<form action=\"forum.jsp\">"
-                        + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"game\"/>"
+                        + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
+                        + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
                         + "<input type=\"hidden\" value=\"True\" name=\"siguiente\"/>"
                         + "<input type=\"submit\" value=\"Siguiente\">"
                         + "</form>");
@@ -104,16 +109,9 @@
         %>
     </div>
     <%
-        sql = "SELECT  P.name "
-                + "from  platform P, game G "
-                + "where G.id = '" + gameID + "'"
-                + "and P.id = G.platformId";
-        rs = s.executeQuery(sql);
-        rs.next();
-
         out.println("<form action=\"viewGame.jsp\">"
                 + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
-                + "<input type=\"hidden\" value=\"" + rs.getString("name") + "\" name=\"platformName\"/>"
+                + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
                 + "<input type=\"submit\" value=\"Volver al juego\">"
                 + "</form>");
     %>

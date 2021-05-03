@@ -121,6 +121,12 @@
         %>
     </div>
     <%
+        out.println("<form action=\"sendMessage.jsp\">"
+                    + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
+                    + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
+                    + "<input type=\"submit\" value=\"Publicar mensaje\">"
+                    + "</form>");
+        
         out.println("<form action=\"forum.jsp\">"
                 + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
                 + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"

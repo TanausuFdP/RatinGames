@@ -12,8 +12,7 @@
     <%@include file="header.jsp" %>
     <link rel="stylesheet" href="../css-files/message.css">
 
-    <%
-        out.println("<br> <br>");
+    <%        out.println("<br> <br>");
     %>
     <h1>Videojuego seleccionado:</h1>
     <%
@@ -57,7 +56,6 @@
             exc.printStackTrace();
         }
 
-
         sql = "SELECT  name "
                 + "FROM  genre "
                 + "where id IN( "
@@ -84,43 +82,34 @@
             exc.printStackTrace();
         }
         out.println("</table>");
-        try {
-            s.close();
-            conexion.close();
-        } catch (SQLException exc) {
-            exc.printStackTrace();
-        }
-        
-        sql =   "SELECT  rating "
-                    + "FROM rating "
-                    + "WHERE ratingType = 0 "
-                    + "AND gameId = '"+ idGame +"'";
-        
-        rs = s.executeQuery (sql);
-            out.println("<table class=\"center\">"
-                    + "<tr>"
-                    + "<th><h2>Valoración</h2></th>"
-                    + "</tr>"); 
-          
-            
-            
-        DecimalFormatSymbols separadoresPersonalizados = new DecimalFormatSymbols();
-        separadoresPersonalizados.setDecimalSeparator('.');  
-        DecimalFormat format = new DecimalFormat("#.##");
-        
-        float  media = 0;
-        int n = 0;
-        
 
-        while(rs.next()){
+        sql = "SELECT  rating "
+                + "FROM rating "
+                + "WHERE ratingType = 0 "
+                + "AND gameId = '" + idGame + "'";
+
+        rs = s.executeQuery(sql);
+        out.println("<table class=\"center\">"
+                + "<tr>"
+                + "<th><h2>Valoración</h2></th>"
+                + "</tr>");
+
+        DecimalFormatSymbols separadoresPersonalizados = new DecimalFormatSymbols();
+        separadoresPersonalizados.setDecimalSeparator('.');
+        DecimalFormat format = new DecimalFormat("#.##");
+
+        float media = 0;
+        int n = 0;
+
+        while (rs.next()) {
             n++;
             media += Float.parseFloat(rs.getString("rating"));
         }
         media = media / n;
-                out.println("<tr>"
-                    + "<td>" + format.format(media) + "</td>"
-                    + "</tr>"
-                    + "</table>");
+        out.println("<tr>"
+                + "<td>" + format.format(media) + "</td>"
+                + "</tr>"
+                + "</table>");
     %>
 </div>
 <div>
@@ -129,6 +118,7 @@
 
             out.println("<form action=\"sendMessage.jsp\">"
                     + "<input type=\"hidden\" value=\"" + idGame + "\" name=\"gameID\"/>"
+                    + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
                     + "<input type=\"submit\" value=\"Publicar mensaje\">"
                     + "</form>");
         }
@@ -136,13 +126,15 @@
 
         out.println("<form action=\"forum.jsp\">"
                 + "<input type=\"hidden\" value=\"" + idGame + "\" name=\"gameID\"/>"
+                + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
                 + "<input type=\"submit\" value=\"Ver foro\">"
                 + "</form>");
-        
+
         out.println("<form action=\"rating.jsp\">"
-                    + "<input type=\"hidden\" value=\"" + idGame + "\" name=\"gameID\"/>"
-                    + "<input type=\"submit\" value=\"Valorar\">"
-                    + "</form>");
+                + "<input type=\"hidden\" value=\"" + idGame + "\" name=\"gameID\"/>"
+                + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
+                + "<input type=\"submit\" value=\"Valorar\">"
+                + "</form>");
     %>
 </div>
 </body>

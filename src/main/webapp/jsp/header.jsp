@@ -8,7 +8,7 @@
 <body>
 <div class="topBar">
     <p>Ratin'Games</p>
-    <a href="index.jsp">Inicio</a>
+    <a href="index.jsp">INICIO</a>
     <a>JUEGOS</a>
     <a>NOTICIAS</a>
     <a>FORO</a>
@@ -21,11 +21,9 @@
 
     <%
         if (session.getAttribute("User") != null) {
-            out.println(
-                    "<a href=\"login.jsp\">LogOut</a>");
-            //cerrar sesion
+            out.println("<a href=\"login.jsp\">LOGOUT</a>");
         } else {
-            out.println("<a href=\"login.jsp\">LogIn</a>");
+            out.println("<a href=\"login.jsp\">LOGIN</a>");
         }
     %>
   </div>

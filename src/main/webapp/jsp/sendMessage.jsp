@@ -6,7 +6,6 @@
 <%@page import="es.ulpgc.ratingames.model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,6 +21,7 @@
         <%
         String gameID = (String)session.getAttribute("SelectedgameID");
         %>
+
 
         <h3>Escribir en el foro</h3>
         <div class="container">

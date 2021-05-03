@@ -23,8 +23,6 @@
         
         ResultSet rs = s.executeQuery (sql);
         Statement aux = conexion.createStatement();
-
-
 %>
 
             <h1>Resultados:</h1>
@@ -57,17 +55,11 @@
                     + "<button>Ver juego</button>"
                     + "</form></td>" +
                         "</tr>");
-
-
             }
             out.println("</table>");
-            
-
-
         s.close();
         conexion.close();
 %>
-
 </div>
 
 

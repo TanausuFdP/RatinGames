@@ -23,13 +23,13 @@
         
         User user = (User)session.getAttribute("User");
         if(user instanceof Player){
+
             out.println(""
                     + "<form action=\"sendMessage.jsp\">"
                     + "<input type=\"hidden\" value=\"" + idGame + "\" name=\"game\"/>"
                     + "<input type=\"submit\" value=\"Publicar mensaje\">"
                     + "</form>");
         }
-
         String sql = "SELECT * "
                 + "FROM game G "
                 + "WHERE G.id = '"+ idGame +"'";
@@ -66,7 +66,6 @@
                     + "select  genreId "
                     + "from gamegenre "
                     + "where gameId = "+ idGame +")";
-
         rs = s.executeQuery (sql);
 
             out.println("<table class=\"center\">"
@@ -103,4 +102,3 @@
         </div>
     </body>
 </html>
-

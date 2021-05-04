@@ -24,7 +24,7 @@
     <h1>RESULTADOS</h1>
 
     <%
-        out.println("<table class=\"center\">"
+        out.println("<table>"
                 + "<tr>"
                 + "<th><h2>Titulo</h2></th>"
                 + "<th><h2>Studio</h2></th>"

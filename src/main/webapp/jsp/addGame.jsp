@@ -3,7 +3,7 @@
 <jsp:include page="header.jsp"/>
 <%@include file="BBDDConnection.jsp"%>
 
-<div>
+<div class="rating">
     <form class="form" method="POST" action="addGame.jsp">
         <input type="hidden" name="addGameForm" value="true">
         <label>Título</label>

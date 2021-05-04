@@ -1,116 +1,116 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
 
 body{
-	margin-top: 60pt;
+    margin-top: 60pt;
 }
 
 p, a, label{
-	font-size: 10pt;
-	font-family: 'Poppins', Sans-Serif;
-	margin: auto;
-	width: 90%;
-	padding-bottom: 25pt;
-	padding-top: 25pt;
-	text-align: justify;
+    font-size: 10pt;
+    font-family: 'Poppins', Sans-Serif;
+    margin: auto;
+    width: 90%;
+    padding-bottom: 25pt;
+    padding-top: 25pt;
+    text-align: justify;
 }
 
 h1, h2, h3, h4, h5, h6 {
-	font-family: 'Poppins', Sans-Serif;
+    font-family: 'Poppins', Sans-Serif;
 }
 
 input, button, textarea{
-	border: 0;
-	background-color: white;
+    border: 0;
+    background-color: white;
 }
 
 small{
-	font-size: 8pt;
-	font-family: 'Poppins', Sans-Serif;
+    font-size: 8pt;
+    font-family: 'Poppins', Sans-Serif;
 }
 
 /*HEADER*/
 
 .topBar{
-	background-color: #293241;
-	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-	position: fixed;
-	overflow: hidden;
-	height: 40pt;
-	top: 0;
-	left: 0;
-	width: 100%;
+    background-color: #293241;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    position: fixed;
+    overflow: hidden;
+    height: 40pt;
+    top: 0;
+    left: 0;
+    width: 100%;
 }
 
 .topBar p{
-	background-color: #EE6C4D;
-	float: left;
-	margin-right: 0;
-	padding: 10pt 10pt 10pt 10pt;
-	display: block;
-	height: 40pt;
-	width: 120pt;
-	text-align: center;
-	font-size: 14pt;
-	font-weight: bold;
+    background-color: #EE6C4D;
+    float: left;
+    margin-right: 0;
+    padding: 10pt 10pt 10pt 10pt;
+    display: block;
+    height: 40pt;
+    width: 120pt;
+    text-align: center;
+    font-size: 14pt;
+    font-weight: bold;
 }
 
 .topBar a{
-	color: #E0FBFC;
-	float:left;
-	text-decoration: none;
-	text-align: center;
-	padding: 14pt 14pt 18pt 18pt;
-	display: block;
-	height: 40pt;
-	width: 5%;
+    color: #E0FBFC;
+    float:left;
+    text-decoration: none;
+    text-align: center;
+    padding: 14pt 14pt 18pt 18pt;
+    display: block;
+    height: 40pt;
+    width: 5%;
 }
 
 .topBar a:hover{
-	color: #EE6C4D;
+    color: #EE6C4D;
 }
 
 .topBar .topBarForm{
-	float: right;
-	display: block;
-	height: 40pt;
-	width: 20%;
+    float: right;
+    display: block;
+    height: 40pt;
+    width: 20%;
 }
 
 .topBar .topBarForm input{
-	background-color: #98C1D9;
-	display: block;
-	height: 40pt;
-	width: 100%;
-	font-size: 14pt;
+    background-color: #98C1D9;
+    display: block;
+    height: 40pt;
+    width: 100%;
+    font-size: 14pt;
 }
 
 .topBar .topBarForm ::placeholder{
-	color: black;
+    color: black;
 }
 
 .topBar .topBarForm ::-ms-input-placeholder {
-	color: black;
+    color: black;
 }
 
 .topBar .topBarSearch{
-	background-color: #98C1D9;
-	margin-left: 5pt;
-	height: 40pt;
-	float: right;
-	padding: 0pt;
+    background-color: #98C1D9;
+    margin-left: 5pt;
+    height: 40pt;
+    float: right;
+    padding: 0pt;
 }
 
 .topBar img{
-	height: 40pt;
-	float: right;
-	padding: 0pt;
-	margin: 0pt;
+    height: 40pt;
+    float: right;
+    padding: 0pt;
+    margin: 0pt;
 }
 
 .topBar .loginLink{
-	float: right;
-	padding: 0pt;
-	margin: 0pt;
+    float: right;
+    padding: 0pt;
+    margin: 0pt;
 }
 
 /*index*/
@@ -126,18 +126,18 @@ small{
 }
 
 .topNews p, h3{
-	color: white;
+    color: white;
 }
 
 .topNews h3{
-	margin-left: 15pt;
+    margin-left: 15pt;
 }
 
 .topNews img{
-	width: 80%;
-	margin-left: auto;
-	margin-right: auto;
-	display: block;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
 
 .topGames{
@@ -150,47 +150,47 @@ small{
 }
 
 .topGames h3{
-	margin-left: 15pt;
-	color: white;
+    margin-left: 15pt;
+    color: white;
 }
 
 .topGames img{
-	width: 50pt;
-	display: block;
-	float: left;
-	margin-left: 15pt;
+    width: 50pt;
+    display: block;
+    float: left;
+    margin-left: 15pt;
 }
 
 .topGames p{
-	padding: 0;
-	color: white;
+    padding: 0;
+    color: white;
 }
 
 .topGames td{
-	padding-bottom: 10pt;
+    padding-bottom: 10pt;
 }
 
 .topForum{
-	margin-top: 30pt;
-	margin-right: 2.5%;
-	width: 45%;
-	float: right;
-	background-color: #3D5A80;
-	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    margin-top: 30pt;
+    margin-right: 2.5%;
+    width: 45%;
+    float: right;
+    background-color: #3D5A80;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
 .topForum p{
-	color: white;
-	padding: 10pt;
+    color: white;
+    padding: 10pt;
 }
 
 .topForum h3{
-	color: white;
-	margin-left: 15pt;
+    color: white;
+    margin-left: 15pt;
 }
 
 .topForum ul{
-	list-style-type: none;
+    list-style-type: none;
 }
 
 /*footer*/
@@ -205,6 +205,8 @@ small{
 /*RATING*/
 
 .rating{
+    padding-top: 10pt;
+    padding-bottom: 20pt;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 100pt;
@@ -214,27 +216,29 @@ small{
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
-.rating h3{
+.rating h3, h4{
     text-align: center;
     padding-top: 20pt;
+    color: white;
     margin-bottom: 0;
 }
 
 .rating form{
-    padding-top: 40pt;
-    padding-bottom: 20pt;
     width: 90%;
     margin-left: auto;
     margin-right: auto;
 }
 
-.rating p{
+.rating p, label{
     color: white;
     font-weight: bold;
     font-size: 12pt;
     margin: 2pt;
 }
-
+.rating table{
+    margin-left: auto;
+    margin-right: auto;
+}
 .rating input{
     width: 100%;
     padding: 12px 20px;
@@ -260,4 +264,19 @@ small{
 .rating input[type=submit]:hover{
     background-color: #EE6C4D;
     color: white;
+}
+
+.center{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pagination{
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
+}
+
+.pagination p, form{
+    width: 100%;
 }

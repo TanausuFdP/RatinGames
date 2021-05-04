@@ -21,8 +21,8 @@
         %>
 
 
-        <h3>Escribir en el foro</h3>
-        <div class="container">
+        <div class="rating">
+            <h3>Escribir en el foro</h3>
             <form action="sendMessage.jsp">
                 <input type="hidden" name="valor" value="1"/>
                 <%
@@ -48,7 +48,7 @@
                 </select>
                 <textarea id="subject" name="subject" placeholder="Descríbenos el problema" style="height:200px"
                           required></textarea>
-                <input type="submit" value="Submit">
+                <input type="submit" value="Publicar">
             </form>
             <%
                 out.println("<form action=\"viewGame.jsp\">"

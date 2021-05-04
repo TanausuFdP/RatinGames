@@ -48,5 +48,10 @@ tr:hover td {
     width: 20%;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 5pt;
+}
+
+.gameButtons form input{
+    width: 80%;
 }
 

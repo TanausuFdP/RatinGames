@@ -15,7 +15,7 @@
         <label>Edad mínima</label>
         <input type="number" name="minimumAge" placeholder="Edad mínima">
         <label>Fecha de salida</label>
-        <input type="date" name="releaseDate">
+        <input type="date" name="releaseDate" required>
         <label>Idiomas</label>
         <table>
             <tbody>
@@ -49,11 +49,33 @@
                 </tr>
             </tbody>
         </table>
+
+        <label>Géneros</label>
+        <table>
+            <tbody>
+                <%            
+                    String genresSql = "SELECT * FROM genre";
+                    ResultSet rs = s.executeQuery(genresSql);
+                    while (rs.next()) {
+                        out.println("<tr>");
+                        for (int i = 0; i < 3; i++) {
+                            out.println("<td><label>" + rs.getString("name") + "</label></td>");
+                            out.println("<td><input type=\"checkbox\" name=\"genre\" value=" + rs.getString("id") + "></td>");
+                            if (!rs.next()) {
+                                break;
+                            }
+                        }
+                        out.println("</tr>");
+                    }
+                %>
+            </tbody>
+        </table>
+
         <label>Plataforma</label>
         <select name="platformId">
-            <%  
+            <%
                 String sql = "SELECT * " + "FROM platform";
-                ResultSet rs = s.executeQuery(sql);
+                rs = s.executeQuery(sql);
                 while (rs.next()) {
                     out.println("<option value = " + rs.getString("id") + ">" + rs.getString("name") + "</option>");
                 }
@@ -78,12 +100,24 @@
         } else {
             languages = Arrays.toString(languagesArray).replace("[", "").replace("]", "");
         }
-        String sqlSentence = String.format("INSERT INTO game (title, studio, players, releaseDate, language, minimumAge, platformId)"
+        String insertGame = String.format("INSERT INTO game (title, studio, players, releaseDate, language, minimumAge, platformId)"
                 + " VALUES ('%s','%s','%s','%s','%s',%d,%d)", title, studio, players, releaseDate, languages, minimumAge, platformId);
-        try{
-            s.executeUpdate(sqlSentence);
-        } catch(SQLException ex){
+        try {
+            s.executeUpdate(insertGame);
+        } catch (SQLException ex) {
             out.println("<h2 class=\"bad\">ERROR AL PUBLICAR MENSAJE</h2>");
+        }
+        String[] genresArray = request.getParameterValues("genre");
+        ResultSet gameId = s.executeQuery("SELECT id FROM game WHERE title=\""+title+"\" AND platformId="+platformId);
+        gameId.next();
+        int gameID = gameId.getInt("id");
+        if (genresArray != null){
+            String insertGenre = String.format("INSERT INTO gamegenre (gameId, genreId) VALUES ");
+            for(int i = 0; i < genresArray.length; i++){
+                insertGenre = insertGenre.concat(String.format("(%d,'%s'),",gameID, genresArray[i]));
+            }
+            System.out.println(insertGenre);
+            s.executeUpdate(insertGenre.substring(0,insertGenre.length()-1));
         }
     }
 

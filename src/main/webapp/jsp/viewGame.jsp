@@ -70,11 +70,15 @@
         }
 
         try {
-            String genres = "";
-            while (rs.next()) {
-                genres += rs.getString("name") + ", ";
+            if (rs.next()) {
+                String genres = rs.getString("name") + ", ";
+                while (rs.next()) {
+                    genres += rs.getString("name") + ", ";
+                }
+                out.println("<td>" + genres.substring(0, genres.lastIndexOf(",")) + "</td>");
+            } else {
+                out.println("<td>" + "Desconocido" + "</td>");
             }
-            out.println("<td>" + genres.substring(0, genres.lastIndexOf(",")) + "</td>");
         } catch (SQLException exc) {
             exc.printStackTrace();
         }

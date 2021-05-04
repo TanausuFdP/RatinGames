@@ -105,7 +105,7 @@
         try {
             s.executeUpdate(insertGame);
         } catch (SQLException ex) {
-            out.println("<h2 class=\"bad\">ERROR AL PUBLICAR MENSAJE</h2>");
+            out.println("<h2 class=\"bad\">ERROR AL INSERTAR JUEGO</h2>");
         }
         String[] genresArray = request.getParameterValues("genre");
         ResultSet gameId = s.executeQuery("SELECT id FROM game WHERE title=\""+title+"\" AND platformId="+platformId);

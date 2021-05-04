@@ -1,4 +1,6 @@
 <%@page import="java.sql.ResultSet" %>
+<%@page import="es.ulpgc.ratingames.model.Player"%>
+<%@page import="es.ulpgc.ratingames.model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -14,8 +16,10 @@
             <link rel="stylesheet" href="../css-files/message.css">
             <br> <br>
             <h1>Mensajes:</h1>
-            <%        int regsPerPage = 10;
+            <%        
+                int regsPerPage = 10;
                 String discussionID = request.getParameter("discussion");
+                User user = (User) session.getAttribute("User");
                 String gameID = request.getParameter("gameID");
                 String pltName = request.getParameter("platformName");
                 String anterior = request.getParameter("anterior");
@@ -34,7 +38,8 @@
                 } catch (SQLException exc) {
                     exc.printStackTrace();
                 }
-
+                
+                
                 int maxPages;
                 if (regs % regsPerPage == 0) {
                     maxPages = regs / regsPerPage;
@@ -117,11 +122,13 @@
                                 + "<input type=\"submit\" value=\"Siguiente\">"
                                 + "</form>");
                     }
-                    out.println("<form action=\"sendMessage.jsp\">"
-                            + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
-                            + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
-                            + "<input type=\"submit\" value=\"Publicar mensaje\">"
-                            + "</form>");
+                    if (user instanceof Player) {
+                        out.println("<form action=\"sendMessage.jsp\">"
+                                + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
+                                + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
+                                + "<input type=\"submit\" value=\"Publicar mensaje\">"
+                                + "</form>");
+                    }
 
                     out.println("<form action=\"forum.jsp\">"
                             + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"

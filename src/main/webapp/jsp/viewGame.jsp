@@ -19,12 +19,10 @@
         String idGame = request.getParameter("gameID");
         String pltName = request.getParameter("platformName");
         session.setAttribute("pageForum", null);
-
         User user = (User) session.getAttribute("User");
         String sql = "SELECT * "
                 + "FROM game G "
                 + "WHERE G.id = '" + idGame + "'";
-
         ResultSet rs = null;
         try {
             rs = s.executeQuery(sql);
@@ -56,7 +54,6 @@
         } catch (SQLException exc) {
             exc.printStackTrace();
         }
-
         sql = "SELECT  name "
                 + "FROM  genre "
                 + "where id IN( "
@@ -68,7 +65,6 @@
         } catch (SQLException exc) {
             exc.printStackTrace();
         }
-
         try {
             if (rs.next()) {
                 String genres = rs.getString("name") + ", ";
@@ -82,7 +78,6 @@
         } catch (SQLException exc) {
             exc.printStackTrace();
         }
-
         sql = "SELECT  rating "
                 + "FROM rating "
                 + "WHERE ratingType = 0 "
@@ -95,15 +90,22 @@
 
         float media = 0;
         int n = 0;
-
-        while (rs.next()) {
+        if(rs.next()){
             n++;
             media += Float.parseFloat(rs.getString("rating"));
+            while (rs.next()) {
+                n++;
+                media += Float.parseFloat(rs.getString("rating"));
+            }
+            media = media / n;
+            out.println("<td>" + format.format(media) + "</td>"
+                    + "</tr>"
+                    + "</table>");
+        }else{
+            out.println("<td>" + "-" + "</td>"
+                    + "</tr>"
+                    + "</table>");
         }
-        media = media / n;
-        out.println("<td>" + format.format(media) + "</td>"
-                + "</tr>"
-                + "</table>");
     %>
 </div>
 <div class="gameButtons">

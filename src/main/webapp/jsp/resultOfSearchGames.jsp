@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="../css-files/searchGames.css">
 <div class="results">
     <%        
-        User user = (User) session.getAttribute("User");
         String search = request.getParameter("search_games").toLowerCase();
         String sql = "SELECT * FROM game WHERE game.title LIKE '%" + search + "%'";
 

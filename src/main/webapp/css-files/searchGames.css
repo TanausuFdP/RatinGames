@@ -4,12 +4,14 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+
 table {     
     font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
     font-size: 12px;    
-    margin: 45px;    
     text-align: center;    
-    border-collapse: collapse; }
+    border-collapse: collapse;
+    HEIGHT:100%;
+    WIDTH:100%; }
 
 th {     
     font-size: 13px;     

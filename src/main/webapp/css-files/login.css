@@ -107,7 +107,7 @@ input {
     overflow: hidden;
     width: 768px;
     max-width: 100%;
-    min-height: 480px;
+    min-height: 300px;
 
 }
 
@@ -221,9 +221,10 @@ input {
 
 .imgcontainer {
 	text-align: center;
-	margin: 0px 0 40px ;
+        margin-top: 20px;
+	/*margin: px 0 40px ;*/
 }
 img.avatar {
-	width: 50%;
+	width: 30%;
 	border-radius: 25%;
 }

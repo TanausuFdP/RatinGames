@@ -1,0 +1,26 @@
+
+/*Add Game*/
+.form{
+    margin:5% 30%;
+    background-color: #ddd;
+    display: inline-block;
+    width:35%;
+    border-style: solid;
+    border-width: 2pt;
+    margin-bottom: 10pt;
+}
+.form input[type=text],input[type=date],input[type=number],input[type=submit], textArea, select{
+    padding:1% 0;
+    width:80%;
+    margin:5% 10%;
+    border:solid 2pt #000;
+    border-radius:2pt;
+}
+
+.form input[type=checkbox]{
+    margin-right: 20pt;
+}
+
+table{
+    margin: auto;
+}

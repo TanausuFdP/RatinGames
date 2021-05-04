@@ -54,7 +54,7 @@ small{
     font-weight: bold;
 }
 
-.topBar a{
+.topBar .topBarLink{
     color: #E0FBFC;
     float:left;
     text-decoration: none;
@@ -65,8 +65,15 @@ small{
     width: 6%;
 }
 
-.topBar a:hover{
+.topBar .topBarLink:hover{
     color: #EE6C4D;
+}
+
+.topBar .topBarLogo{
+    text-align: center;
+    font-size: 14pt;
+    color: black;
+    text-decoration: none;
 }
 
 .topBar .topBarForm{

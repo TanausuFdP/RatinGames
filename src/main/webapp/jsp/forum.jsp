@@ -14,7 +14,8 @@
             <link rel="stylesheet" href="../css-files/message.css">
             <br> <br>
             <h1>Discusiones del foro:</h1>
-            <%        String gameID = request.getParameter("gameID");
+            <%        
+                String gameID = request.getParameter("gameID");
                 String pltName = request.getParameter("platformName");
                 String anterior = request.getParameter("anterior");
                 String siguiente = request.getParameter("siguiente");

@@ -110,6 +110,11 @@
                     + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
                     + "<input type=\"submit\" value=\"Publicar mensaje\">"
                     + "</form>");
+            out.println("<form action=\"rating.jsp\">"
+                    + "<input type=\"hidden\" value=\"" + idGame + "\" name=\"gameID\"/>"
+                    + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
+                    + "<input type=\"submit\" value=\"Valorar\">"
+                    + "</form>");
         }
         out.println("<form action=\"forum.jsp\">"
                 + "<input type=\"hidden\" value=\"" + idGame + "\" name=\"gameID\"/>"
@@ -117,11 +122,6 @@
                 + "<input type=\"submit\" value=\"Ver foro\">"
                 + "</form>");
 
-        out.println("<form action=\"rating.jsp\">"
-                + "<input type=\"hidden\" value=\"" + idGame + "\" name=\"gameID\"/>"
-                + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
-                + "<input type=\"submit\" value=\"Valorar\">"
-                + "</form>");
     %>
 </div>
 </body>

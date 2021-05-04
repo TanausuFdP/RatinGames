@@ -33,14 +33,14 @@ input[type=submit]:hover {
     margin-top: 30px;
 }
 
-.bad { /* Color del mensaje de error */
+.bad { 
 	text-align: center;
 	width: 100%;
 	padding: 12px;
 	background-color: #a22;
 	color: #fff
 }
-.good { /* Color del mensaje de error */
+.good {
 	text-align: center;
 	width: 100%;
 	padding: 12px;

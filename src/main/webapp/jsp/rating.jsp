@@ -2,7 +2,8 @@
 <%@page import="java.sql.ResultSet"%>
 <%@include file="BBDDConnection.jsp"%>
 <jsp:include page="header.jsp"/>
-<%    String gameId = request.getParameter("gameID");
+<%    
+    String gameId = request.getParameter("gameID");
     String platformName = request.getParameter("platformName");
 
     User user = (User) session.getAttribute("User");

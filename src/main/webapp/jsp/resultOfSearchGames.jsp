@@ -6,7 +6,9 @@
 <!DOCTYPE html>
 <link rel="stylesheet" href="../css-files/searchGames.css">
 <div class="results">
-    <%        String search = request.getParameter("search_games").toLowerCase();
+    <%        
+        User user = (User) session.getAttribute("User");
+        String search = request.getParameter("search_games").toLowerCase();
         String sql = "SELECT * FROM game WHERE game.title LIKE '%" + search + "%'";
 
         ResultSet rs = null;
@@ -22,10 +24,6 @@
     <h1>RESULTADOS</h1>
 
     <%
-        out.println("<form action=\"addGame.jsp\">"
-                + "<input type=\"submit\" value=\"Añadir juego\">"
-                + "</form>");
-
         out.println("<table>"
                 + "<tr>"
                 + "<th><h2>Titulo</h2></th>"
@@ -61,8 +59,6 @@
         } catch (SQLException exc) {
             exc.printStackTrace();
         }
-
-
     %>
 </div>
 

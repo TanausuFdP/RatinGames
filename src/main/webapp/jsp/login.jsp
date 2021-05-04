@@ -1,3 +1,4 @@
+<%@page import="es.ulpgc.ratingames.model.Admin"%>
 <%@page import="java.sql.SQLException" %>
 <%@page import="java.sql.DriverManager" %>
 <%@page import="java.sql.Connection" %>
@@ -77,8 +78,13 @@
 
         try {
             if (rs.next()) {
-
-                User user = new Player(rs.getInt("Id"), rs.getString("username"), rs.getString("password"), rs.getString("email"));
+                User user = null;
+                if(rs.getString("username").equals("admin")){
+                    user = new Admin(rs.getInt("Id"), rs.getString("username"), rs.getString("password"), rs.getString("email"));
+                }else{
+                    
+                    user = new Player(rs.getInt("Id"), rs.getString("username"), rs.getString("password"), rs.getString("email"));
+                }
                 session.setAttribute("User", user);
                 session.setAttribute("UserID", rs.getInt("Id"));
                 response.sendRedirect("index.jsp");

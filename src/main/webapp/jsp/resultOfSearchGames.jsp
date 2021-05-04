@@ -6,13 +6,11 @@
 <!DOCTYPE html>
 <link rel="stylesheet" href="../css-files/searchGames.css">
 <div class="results">
-    <%
-        String search = request.getParameter("search_games").toLowerCase();
+    <%        String search = request.getParameter("search_games").toLowerCase();
         String sql = "SELECT * FROM game WHERE game.title LIKE '%" + search + "%'";
 
-
         ResultSet rs = null;
-        Statement  aux = null;
+        Statement aux = null;
         try {
             rs = s.executeQuery(sql);
             aux = conexion.createStatement();
@@ -24,6 +22,10 @@
     <h1>RESULTADOS</h1>
 
     <%
+        out.println("<form action=\"addGame.jsp\">"
+                + "<input type=\"submit\" value=\"Añadir juego\">"
+                + "</form>");
+
         out.println("<table>"
                 + "<tr>"
                 + "<th><h2>Titulo</h2></th>"
@@ -50,8 +52,8 @@
                         + "<input type=\"hidden\" value=\"" + rs.getInt("id") + "\" name=\"gameID\"/>"
                         + "<input type=\"hidden\" value=\"" + rs1.getString("name") + "\" name=\"platformName\"/>"
                         + "<button>Ver juego</button>"
-                        + "</form></td>" +
-                        "</tr>");
+                        + "</form></td>"
+                        + "</tr>");
             }
             out.println("</table>");
             s.close();

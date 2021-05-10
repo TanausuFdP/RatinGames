@@ -51,7 +51,7 @@
         <%
             User user = (User) session.getAttribute("User");
             Integer userId = (Integer) session.getAttribute("UserID");
-            if (user instanceof Player) {
+            if (user instanceof Player || user instanceof Admin) {
                 String subjt = request.getParameter("subject");
                 if (subjt != null) {
 

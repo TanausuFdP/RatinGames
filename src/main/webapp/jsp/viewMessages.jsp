@@ -1,3 +1,4 @@
+<%@page import="es.ulpgc.ratingames.model.Admin"%>
 <%@page import="java.sql.ResultSet" %>
 <%@page import="es.ulpgc.ratingames.model.Player"%>
 <%@page import="es.ulpgc.ratingames.model.User"%>
@@ -118,7 +119,7 @@
                     }
                     out.println("</div>"
                             + "<div class=\"forumBack\">");
-                    if (user instanceof Player) {
+                    if (user instanceof Player || user instanceof Admin) {
                         out.println("<form action=\"sendMessage.jsp\">"
                                 + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
                                 + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"

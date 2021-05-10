@@ -104,12 +104,13 @@
                                 + "</form>");
                     }
                     out.println("</div>"
-                            + "<div class=\"forumBack\"");
+                            + "<div class=\"forumBack\">");
                     out.println("<form action=\"viewGame.jsp\">"
                             + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
                             + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
                             + "<input type=\"submit\" value=\"Volver al juego\">"
                             + "</form>");
+                    out.println("</div>");
                 %>
             </div>
         </div>

@@ -1,3 +1,4 @@
+<%@page import="es.ulpgc.ratingames.model.Admin"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.text.DecimalFormatSymbols"%>
 <%@page import="java.sql.ResultSet" %>
@@ -89,17 +90,19 @@
 </div>
 <div class="gameButtons">
     <%
-        if (user instanceof Player) {
+        if (user instanceof Player || user instanceof Admin) {
             out.println("<form action=\"sendMessage.jsp\">"
                     + "<input type=\"hidden\" value=\"" + idGame + "\" name=\"gameID\"/>"
                     + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
                     + "<input type=\"submit\" value=\"Publicar mensaje\">"
                     + "</form>");
-            out.println("<form action=\"rating.jsp\">"
-                    + "<input type=\"hidden\" value=\"" + idGame + "\" name=\"gameID\"/>"
-                    + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
-                    + "<input type=\"submit\" value=\"Valorar\">"
-                    + "</form>");
+            if(user instanceof Player)
+                out.println("<form action=\"rating.jsp\">"
+                        + "<input type=\"hidden\" value=\"" + idGame + "\" name=\"gameID\"/>"
+                        + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
+                        + "<input type=\"submit\" value=\"Valorar\">"
+                        + "</form>");
+                
         }
         out.println("<form action=\"forum.jsp\">"
                 + "<input type=\"hidden\" value=\"" + idGame + "\" name=\"gameID\"/>"

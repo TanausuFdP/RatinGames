@@ -1,7 +1,6 @@
 <%@page import="java.sql.ResultSet"%>
 <jsp:include page="header.jsp"/>
-<%@include file="BBDDConnection.jsp" %>
-
+<%@include file="BBDDConnection.jsp"%>
 <%    String title = "Lorem ipsum dolor sit amet consectetur.";
     String text = "Adipiscing elit auctor, ultrices vivamus consequat vulputate purus.";
     String news_image = "../css-files/images/news_sample.jpg";

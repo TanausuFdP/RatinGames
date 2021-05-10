@@ -3,18 +3,8 @@
 <%@page import="java.sql.ResultSet" %>
 <%@page import="es.ulpgc.ratingames.model.Player" %>
 <%@page import="es.ulpgc.ratingames.model.User" %>
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
-
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Nuevo Mensaje</title>
-        <link rel="stylesheet" href="../css-files/message.css">
-    </head>
-    <body>
-        <%@include file="header.jsp" %>
-        <%@include file="BBDDConnection.jsp" %>
+<jsp:include page="header.jsp"/>
+<%@include file="BBDDConnection.jsp"%>
 
         <%    String gameID = request.getParameter("gameID");
             String pltName = request.getParameter("platformName");
@@ -22,8 +12,8 @@
 
 
         <div class="rating">
-            <h3>Escribir en el foro</h3>
-            <form action="sendMessage.jsp">
+            <h3>NUEVO MENSAJE</h3>
+            <form action="sendMessage.jsp" class="sendMessage">
                 <input type="hidden" name="valor" value="1"/>
                 <%
                    out.println("<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>");
@@ -46,7 +36,7 @@
                         }
                     %>
                 </select>
-                <textarea id="subject" name="subject" placeholder="DescrÃ­benos el problema" style="height:200px"
+                <textarea id="subject" name="subject" placeholder="Descríbenos el problema" style="height:200px"
                           required></textarea>
                 <input type="submit" value="Publicar">
             </form>
@@ -69,7 +59,8 @@
                         Integer res = s.executeUpdate("INSERT INTO message (discussionId, userId, body,date)"
                                 + " VALUES ('" + idDiscusion + "', '" + userId + "', '" + subjt + "', '" + LocalDateTime.now() + "')");
                         if (res > 0) {
-                            out.println("Mensaje publicado.");
+                            out.println("<div class=\"forumBack\">"
+                                    + "<p>Mensaje publicado.</p>");
                             out.println("<form action=\"viewMessages.jsp\">"
                                     + "<input type=\"hidden\" value=\"" + idDiscusion + "\" name=\"discussion\"/>"
                                     + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"

@@ -1,7 +1,7 @@
 <%@page import="es.ulpgc.ratingames.model.User"%>
 <%@page import="java.sql.ResultSet"%>
-<%@include file="BBDDConnection.jsp"%>
 <jsp:include page="header.jsp"/>
+<%@include file="BBDDConnection.jsp"%>
 <%    
     String gameId = request.getParameter("gameID");
     String platformName = request.getParameter("platformName");

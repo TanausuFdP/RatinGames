@@ -12,7 +12,7 @@
             <a class="topBarLink">JUEGOS</a>
             <a class="topBarLink">NOTICIAS</a>
             <a class="topBarLink">FORO</a>
-            <a class="topBarLink">PLATAFORMAS</a>
+            <a class="topBarLink">CONTACTO</a>
             <a href="login.jsp"><img src="../css-files/images/login.png"></a>
             <form action="resultOfSearchGames.jsp" class="topBarForm" method="get">
                 <input type=text placeholder="Buscar juegos" name="search_games">
@@ -23,7 +23,7 @@
                 if (session.getAttribute("User") != null) {
                     User user = (User) session.getAttribute("User");
                     if (user instanceof Admin) {
-                        out.println("<a href=\"addGame.jsp\">AÑADIR JUEGO</a>");
+                        out.println("<a href=\"addGame.jsp\" class=\"topBarLink\" id=\"topBarLink1\">AÑADIR JUEGO</a>");
                     }
                 }
             %>

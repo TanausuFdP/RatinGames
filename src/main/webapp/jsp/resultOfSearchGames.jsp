@@ -1,10 +1,7 @@
 <%@page import="java.sql.ResultSet" %>
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
-<%@include file="BBDDConnection.jsp" %>
 <%@include file="header.jsp" %>
+<%@include file="BBDDConnection.jsp" %>
 
-<!DOCTYPE html>
-<link rel="stylesheet" href="../css-files/searchGames.css">
 <div class="results">
     <%        
         String search = request.getParameter("search_games").toLowerCase();
@@ -23,10 +20,10 @@
     <h1>RESULTADOS</h1>
 
     <%
-        out.println("<table>"
+        out.println("<table class=\"searchGamesTable\">"
                 + "<tr>"
-                + "<th><h2>Titulo</h2></th>"
-                + "<th><h2>Studio</h2></th>"
+                + "<th><h2>Título</h2></th>"
+                + "<th><h2>Estudio</h2></th>"
                 + "<th><h2>Plataforma</h2></th>"
                 + "<th></th>"
                 + "</tr>");
@@ -48,7 +45,7 @@
                         + "<td><form action=\"viewGame.jsp\">"
                         + "<input type=\"hidden\" value=\"" + rs.getInt("id") + "\" name=\"gameID\"/>"
                         + "<input type=\"hidden\" value=\"" + rs1.getString("name") + "\" name=\"platformName\"/>"
-                        + "<button>Ver juego</button>"
+                        + "<input type=\"submit\" value=\"Ver juego\">"
                         + "</form></td>"
                         + "</tr>");
             }

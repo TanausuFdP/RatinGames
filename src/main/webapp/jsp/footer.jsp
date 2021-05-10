@@ -1,5 +1,6 @@
 <div class="footer">
     <hr>
+    <small> Copyright © 2021 </small>
     <small>Proyecto realizado por:</small>
     <small>Gabriel Boullosa Rodríguez, Yousuf Boutahar El Maachi, Tanausú Fernández del Pino y Jeremy Trujillo
         Sánchez.</small><br>

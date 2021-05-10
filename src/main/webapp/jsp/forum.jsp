@@ -1,18 +1,7 @@
 <%@page import="java.sql.ResultSet" %>
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Foro</title>
-        <link rel="stylesheet" href="../css-files/searchGames.css">
-    </head>
-    <body>
-        <%@include file="BBDDConnection.jsp" %>
-        <div class="results">
-            <jsp:include page="header.jsp"/>
-            <link rel="stylesheet" href="../css-files/message.css">
-            <br> <br>
+<jsp:include page="header.jsp"/>
+<%@include file="BBDDConnection.jsp"%>
+<div class="results">
             <h1>Discusiones del foro:</h1>
             <%        
                 String gameID = request.getParameter("gameID");
@@ -21,14 +10,16 @@
                 String siguiente = request.getParameter("siguiente");
                 session.setAttribute("pageMessages", null);
 
-                String sql = "SELECT * "
+                String sql = "SELECT COUNT(*) "
                         + "FROM discussion D "
                         + "WHERE D.gameId = '" + gameID + "'";
 
                 ResultSet rs = s.executeQuery(sql);
 
-                rs.last();
-                int regs = rs.getRow();
+                int regs = 0;
+                if(rs.next()){
+                    regs = rs.getInt(1);
+                }
 
                 int maxPages;
                 if (regs % 10 == 0) {
@@ -48,23 +39,28 @@
                     actualPage++;
                 }
                 session.setAttribute("pageForum", actualPage);
+                
+                sql = "SELECT * "
+                        + "FROM discussion D "
+                        + "WHERE D.gameId = '" + gameID + "'";
+                
+                rs = s.executeQuery(sql);
 
                 int minReg = 1 + (10 * actualPage);
-                if (minReg == 1) {
-                    rs.first();
-                } else {
-                    rs.absolute(minReg);
-                }
+                rs.next();
+                    for (int i = 1; i < minReg; i++) {
+                        rs.next();
+                    }
 
                 int maxReg = regs;
                 if ((10 * actualPage) + 10 < regs) {
                     maxReg = (10 * actualPage) + 10;
                 }
 
-                out.println("<table class=\"center\">"
+                out.println("<table class=\"searchGamesTable\">"
                         + "<tr>"
-                        + "<th><h2>TÃ­tulo discusiÃ³n</h2></th>"
-                        + "<th><h2>Enlace discusiÃ³n</h2></th>"
+                        + "<th><h2>Título discusión</h2></th>"
+                        + "<th><h2>Enlace discusión</h2></th>"
                         + "</tr>");
 
                 while (minReg <= maxReg) {
@@ -98,7 +94,7 @@
                                 + "<input type=\"submit\" value=\"Anterior\">"
                                 + "</form>");
                     }
-                    out.println("Pagina actual: " + (actualPage + 1));
+                    out.println("<p>Pagina actual: <b>" + (actualPage + 1) + "</b></p>");
                     if (actualPage != maxPages - 1) {
                         out.println("<form action=\"forum.jsp\">"
                                 + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
@@ -107,6 +103,8 @@
                                 + "<input type=\"submit\" value=\"Siguiente\">"
                                 + "</form>");
                     }
+                    out.println("</div>"
+                            + "<div class=\"forumBack\"");
                     out.println("<form action=\"viewGame.jsp\">"
                             + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
                             + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"

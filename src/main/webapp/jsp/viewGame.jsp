@@ -3,20 +3,12 @@
 <%@page import="java.sql.ResultSet" %>
 <%@page import="es.ulpgc.ratingames.model.Player" %>
 <%@page import="es.ulpgc.ratingames.model.User" %>
-<%@include file="BBDDConnection.jsp" %>
-<%@include file="header.jsp" %>
+<jsp:include page="header.jsp"/>
+<%@include file="BBDDConnection.jsp"%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
-<!DOCTYPE html>
-<link rel="stylesheet" href="../css-files/searchGames.css">
 <div class="gameView">
-    <link rel="stylesheet" href="../css-files/message.css">
 
-    <%        out.println("<br> <br>");
-    %>
-    <h1>Videojuego seleccionado</h1>
-    <%
-        String idGame = request.getParameter("gameID");
+<%      String idGame = request.getParameter("gameID");
         String pltName = request.getParameter("platformName");
         session.setAttribute("pageForum", null);
         User user = (User) session.getAttribute("User");
@@ -29,27 +21,16 @@
             if (rs.next()) {
                 String gameID = rs.getString("id");
                 session.setAttribute("SelectedgameID", gameID);
-                out.println("<table class=\"center\">"
-                        + "<tr>"
-                        + "<th><h2>Titulo</h2></th>"
-                        + "<th><h2>Estudio</h2></th>"
-                        + "<th><h2>Jugadores</h2></th>"
-                        + "<th><h2>Fecha de salida</h2></th>"
-                        + "<th><h2>Idioma</h2></th>"
-                        + "<th><h2>RestricciÃ³n de edad</h2></th>"
-                        + "<th><h2>Plataforma</h2></th>"
-                        + "<th><h2>GÃ©neros</h2></th>"
-                        + "<th><h2>ValoraciÃ³n</h2></th>"
-                        + "</tr>");
-
-                out.println("<tr>"
-                        + "<td>" + rs.getString("title") + "</td>"
-                        + "<td>" + rs.getString("studio") + "</td>"
-                        + "<td>" + rs.getString("players") + "</td>"
-                        + "<td>" + rs.getString("releaseDate") + "</td>"
-                        + "<td>" + rs.getString("language") + "</td>"
-                        + "<td>" + rs.getString("minimumAge") + "</td>"
-                        + "<td>" + pltName + "</td>");
+                out.println("<h1>" + rs.getString("title") + "</h1>"
+                        + "<ul>"
+                        + "<li><b>Estudio: </b>" + rs.getString("studio") + "</li>"
+                        + "<li><b>Plataforma: </b>" + pltName + "</li>"
+                        + "<li><b>Fecha de salida: </b>" + rs.getString("releaseDate") + "</li>"
+                        + "<hr>"
+                        + "<li><b>Idioma: </b>" + rs.getString("language") + "</li>"
+                        + "<li><b>Edad mínima: </b>" + rs.getString("minimumAge") + "</li>"
+                        + "<li><b>Jugadores: </b>" + rs.getString("players") + "</li>"
+                        + "<hr>");
             }
         } catch (SQLException exc) {
             exc.printStackTrace();
@@ -71,9 +52,9 @@
                 while (rs.next()) {
                     genres += rs.getString("name") + ", ";
                 }
-                out.println("<td>" + genres.substring(0, genres.lastIndexOf(",")) + "</td>");
+                out.println("<li><b>Género: </b>" + genres.substring(0, genres.lastIndexOf(",")) + "</li>");
             } else {
-                out.println("<td>" + "Desconocido" + "</td>");
+                out.println("<li><b>Género: </b>" + "Desconocido" + "<li>");
             }
         } catch (SQLException exc) {
             exc.printStackTrace();
@@ -98,13 +79,11 @@
                 media += Float.parseFloat(rs.getString("rating"));
             }
             media = media / n;
-            out.println("<td>" + format.format(media) + "</td>"
-                    + "</tr>"
-                    + "</table>");
+            out.println("<li><b>Valoración: </b>" + format.format(media) + "</li>"
+                    + "</ul>");
         }else{
-            out.println("<td>" + "-" + "</td>"
-                    + "</tr>"
-                    + "</table>");
+            out.println("<li><b>Valoración: </b>" + "-" + "</li>"
+                    + "</ul>");
         }
     %>
 </div>

@@ -1,20 +1,9 @@
 <%@page import="java.sql.ResultSet" %>
 <%@page import="es.ulpgc.ratingames.model.Player"%>
 <%@page import="es.ulpgc.ratingames.model.User"%>
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Mensajes foro</title>
-        <link rel="stylesheet" href="../css-files/searchGames.css">
-    </head>
-    <body>
-        <%@include file="BBDDConnection.jsp" %>
+<jsp:include page="header.jsp"/>
+<%@include file="BBDDConnection.jsp"%>
         <div class="results">
-            <jsp:include page="header.jsp"/>
-            <link rel="stylesheet" href="../css-files/message.css">
-            <br> <br>
             <h1>Mensajes:</h1>
             <%        
                 int regsPerPage = 10;
@@ -25,7 +14,7 @@
                 String anterior = request.getParameter("anterior");
                 String siguiente = request.getParameter("siguiente");
 
-                String sql = "SELECT * "
+                String sql = "SELECT COUNT(*) "
                         + "FROM message M "
                         + "WHERE M.discussionId = '" + discussionID + "'";
 
@@ -33,8 +22,9 @@
                 int regs = 0;
                 try {
                     rs = s.executeQuery(sql);
-                    rs.last();
-                    regs = rs.getRow();
+                    if(rs.next()){
+                        regs = rs.getInt(1);
+                    }
                 } catch (SQLException exc) {
                     exc.printStackTrace();
                 }
@@ -58,19 +48,23 @@
                     actualPage++;
                 }
                 session.setAttribute("pageMessages", actualPage);
+                
+                sql = "SELECT * "
+                        + "FROM message M "
+                        + "WHERE M.discussionId = '" + discussionID + "'";
+                rs = s.executeQuery(sql);
 
                 int minReg = 1 + (regsPerPage * actualPage);
                 try {
-                    if (minReg == 1) {
-                        rs.first();
-                    } else {
-                        rs.absolute(minReg);
+                    rs.next();
+                    for (int i = 1; i < minReg; i++) {
+                        rs.next();
                     }
                 } catch (SQLException exc) {
                     exc.printStackTrace();
                 }
 
-                out.println("<table class=\"center\">"
+                out.println("<table class=\"searchGamesTable\">"
                         + "<tr>"
                         + "<th><h2>Mensaje</h2></th>"
                         + "<th><h2>Fecha</h2></th>"
@@ -112,7 +106,7 @@
                                 + "<input type=\"submit\" value=\"Anterior\">"
                                 + "</form>");
                     }
-                    out.println("Pagina actual: " + (actualPage + 1));
+                    out.println("<p>Pagina actual: <b>" + (actualPage + 1) + "</b></p>");
                     if (actualPage != maxPages - 1) {
                         out.println("<form action=\"viewMessages.jsp\">"
                                 + "<input type=\"hidden\" value=\"" + discussionID + "\" name=\"discussion\"/>"
@@ -122,6 +116,8 @@
                                 + "<input type=\"submit\" value=\"Siguiente\">"
                                 + "</form>");
                     }
+                    out.println("</div>"
+                            + "<div class=\"forumBack\">");
                     if (user instanceof Player) {
                         out.println("<form action=\"sendMessage.jsp\">"
                                 + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"

@@ -8,27 +8,23 @@
     </head>
     <body>
         <div class="topBar">
-            <p>Ratin'Games</p>
-            <a href="index.jsp">INICIO</a>
-            <a>JUEGOS</a>
-            <a>NOTICIAS</a>
-            <a>FORO</a>
-            <a>PLATAFORMAS</a>
-            <img src="../css-files/images/login.png">
+            <p><a href="index.jsp" class="topBarLogo">Ratin'Games</a></p>
+            <a class="topBarLink">JUEGOS</a>
+            <a class="topBarLink">NOTICIAS</a>
+            <a class="topBarLink">FORO</a>
+            <a class="topBarLink">CONTACTO</a>
+            <a href="login.jsp"><img src="../css-files/images/login.png"></a>
             <form action="resultOfSearchGames.jsp" class="topBarForm" method="get">
                 <input type=text placeholder="Buscar juegos" name="search_games">
             </form>
-            <img src="../css-files/images/search.png" class="topBarSearch">
+           <img src="../css-files/images/search.png" class="topBarSearch">
 
             <%
                 if (session.getAttribute("User") != null) {
-                    out.println("<a href=\"login.jsp\">LOGOUT</a>");
                     User user = (User) session.getAttribute("User");
                     if (user instanceof Admin) {
-                        out.println("<a href=\"addGame.jsp\">AÑADIR JUEGO</a>");
+                        out.println("<a href=\"addGame.jsp\" class=\"topBarLink\" id=\"topBarLink1\">AÑADIR JUEGO</a>");
                     }
-                } else {
-                    out.println("<a href=\"login.jsp\">LOGIN</a>");
                 }
             %>
         </div>

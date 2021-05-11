@@ -1,9 +1,12 @@
+<%@page import="es.ulpgc.ratingames.model.User"%>
+<%@page import="es.ulpgc.ratingames.model.Player"%>
 <%@page import="java.sql.ResultSet" %>
 <jsp:include page="header.jsp"/>
 <%@include file="BBDDConnection.jsp"%>
 <div class="results">
             <h1>Discusiones del foro:</h1>
             <%        
+                User user = (User) session.getAttribute("User");
                 String gameID = request.getParameter("gameID");
                 String pltName = request.getParameter("platformName");
                 String anterior = request.getParameter("anterior");
@@ -105,6 +108,15 @@
                     }
                     out.println("</div>"
                             + "<div class=\"forumBack\">");
+                    
+                    if(user instanceof Player){
+                        out.println("<form action=\"addDiscussion.jsp\">"
+                                + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
+                                + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
+                                + "<input type=\"submit\" value=\"Añadir discusión\">"
+                                + "</form>");
+                    }
+                    
                     out.println("<form action=\"viewGame.jsp\">"
                             + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
                             + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"

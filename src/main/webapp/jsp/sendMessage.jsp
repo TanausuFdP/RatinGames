@@ -1,7 +1,6 @@
-<%@page import="es.ulpgc.ratingames.model.Admin" %>
+<%@page import="es.ulpgc.ratingames.model.ForumUser"%>
 <%@page import="java.time.LocalDateTime" %>
 <%@page import="java.sql.ResultSet" %>
-<%@page import="es.ulpgc.ratingames.model.Player" %>
 <%@page import="es.ulpgc.ratingames.model.User" %>
 <jsp:include page="header.jsp"/>
 <%@include file="BBDDConnection.jsp"%>
@@ -51,7 +50,7 @@
         <%
             User user = (User) session.getAttribute("User");
             Integer userId = (Integer) session.getAttribute("UserID");
-            if (user instanceof Player || user instanceof Admin) {
+            if (user instanceof ForumUser) {
                 String subjt = request.getParameter("subject");
                 if (subjt != null) {
 
@@ -73,8 +72,6 @@
                         out.println("<h2 class=\"bad\">ERROR AL PUBLICAR MENSAJE</h2>");
                     }
                 }
-            } else if (user instanceof Admin) {
-                // si es admin...
             }
 
             try {

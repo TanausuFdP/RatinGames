@@ -1,6 +1,5 @@
-<%@page import="es.ulpgc.ratingames.model.Admin"%>
+<%@page import="es.ulpgc.ratingames.model.ForumUser"%>
 <%@page import="java.sql.ResultSet" %>
-<%@page import="es.ulpgc.ratingames.model.Player"%>
 <%@page import="es.ulpgc.ratingames.model.User"%>
 <jsp:include page="header.jsp"/>
 <%@include file="BBDDConnection.jsp"%>
@@ -119,7 +118,7 @@
                     }
                     out.println("</div>"
                             + "<div class=\"forumBack\">");
-                    if (user instanceof Player || user instanceof Admin) {
+                    if (user instanceof ForumUser) {
                         out.println("<form action=\"sendMessage.jsp\">"
                                 + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
                                 + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"

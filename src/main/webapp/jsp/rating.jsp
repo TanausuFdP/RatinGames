@@ -7,9 +7,26 @@
     String platformName = request.getParameter("platformName");
 
     User user = (User) session.getAttribute("User");
+    
+    ResultSet isJournalist = s.executeQuery("SELECT * FROM journalist WHERE userId=" + "'" + user.getId() + "'");
+    
+    String ratingType = "0";
+    if(isJournalist.next())
+        ratingType = "1";
 
     ResultSet oldRating = s.executeQuery("SELECT * FROM rating WHERE userId=" + "'" + user.getId() + "'"
             + "AND gameId=" + "'" + gameId + "'");
+    
+    if(request.getParameter("ratingDeleted") != null){
+        try {
+            if (oldRating.next()) {
+                s.executeUpdate("DELETE FROM rating WHERE userId='" + user.getId() + "' AND gameId='" + gameId + "'");
+            }
+
+        } catch (SQLException e) {
+            out.println("<h1 class=\"bad\">Error al eliminar la valoración.</hi>");
+        }
+    }
 
     if (request.getParameter("ratingDone") != null) {
         try {
@@ -21,7 +38,7 @@
             } else {
                 s.executeUpdate("INSERT INTO rating (gameId, userId, rating, message, ratingType) VALUES"
                         + "('" + gameId + "', " + "'" + user.getId() + "'" + ", '" + request.getParameter("rating") + "', '"
-                        + request.getParameter("message") + "', '0')");
+                        + request.getParameter("message") + "', " + ratingType + ")");
                 oldRating.close();
             }
 
@@ -74,6 +91,12 @@
                 + "<input type=\"hidden\" value=\"" + gameId + "\" name=\"gameID\"/>"
                 + "<input type=\"hidden\" value=\"" + platformName + "\" name=\"platformName\"/>"
                 + "<input type=\"submit\" value=\"Volver al juego\">"
+                + "</form>");
+        
+        out.println("<form method=\"POST\">"
+                + "<input type=\"hidden\" value=\"" + gameId + "\" name=\"gameID\"/>"
+                + "<input type=\"hidden\" value=\"" + platformName + "\" name=\"platformName\"/>"
+                + "<input type=\"submit\" name=\"ratingDeleted\" value=\"Eliminar valoración\">"
                 + "</form>");
     %>
 </div>

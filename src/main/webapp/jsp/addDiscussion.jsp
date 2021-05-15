@@ -62,3 +62,4 @@
             + "<input type=\"submit\" value=\"Volver al foro\">"
             + "</form>");
 %>
+</div>

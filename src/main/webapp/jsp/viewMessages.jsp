@@ -1,3 +1,4 @@
+<%@page import="es.ulpgc.ratingames.model.Player"%>
 <%@page import="es.ulpgc.ratingames.model.ForumUser"%>
 <%@page import="java.sql.ResultSet" %>
 <%@page import="es.ulpgc.ratingames.model.User"%>
@@ -49,9 +50,11 @@
                 }
                 session.setAttribute("pageMessages", actualPage);
                 
-                sql = "SELECT * "
-                        + "FROM message M "
-                        + "WHERE M.discussionId = '" + discussionID + "'";
+                sql = "SELECT M.id, M.body, M.date, U.username "
+                        + "FROM message M, user U "
+                        + "WHERE M.discussionId = '" + discussionID + "' "
+                        + "AND M.userId = U.id";
+                
                 rs = s.executeQuery(sql);
 
                 int minReg = 1 + (regsPerPage * actualPage);
@@ -63,12 +66,15 @@
                 } catch (SQLException exc) {
                     exc.printStackTrace();
                 }
-
+                
                 out.println("<table class=\"searchGamesTable\">"
-                        + "<tr>"
-                        + "<th><h2>Mensaje</h2></th>"
-                        + "<th><h2>Fecha</h2></th>"
-                        + "</tr>");
+                    + "<tr>"
+                    + "<th><h2>Mensaje</h2></th>"
+                    + "<th><h2>Fecha</h2></th>"
+                    + "<th><h2>Usuario</h2></th>");
+                if(user instanceof Player)
+                    out.println("<th></th>");
+                out.println("</tr>");
 
                 int maxReg = regs;
                 if ((regsPerPage * actualPage) + regsPerPage < regs) {
@@ -79,10 +85,24 @@
                     while (minReg <= maxReg) {
                         String messageID = rs.getString("id");
                         session.setAttribute("messageID", messageID);
-
+                        
                         out.println("<tr>"
-                                + "<td>" + rs.getString("body") + "</td>"
-                                + "<td>" + rs.getString("date") + "</td>");
+                            + "<td>" + rs.getString("body") + "</td>"
+                            + "<td>" + rs.getString("date") + "</td>"
+                            + "<td>" + rs.getString("username") + "</td>");
+                        
+                        if(user instanceof Player){
+                            out.println("<td>"
+                                    + "<form action=\"ResponseMessage.jsp\">"
+                                    + "<input type=\"hidden\" value=\"" + messageID + "\" name=\"menssajeID\"/>"
+                                    + "<input type=\"hidden\" value=\"" + discussionID + "\" name=\"discussion\"/>"
+                                    + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
+                                    + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
+                                    + "<input type=\"submit\" value=\"Responder\">"
+                                    + "</form>"
+                                + "</td>");
+                        }
+                        out.println("</tr>");
 
                         if (minReg != maxReg) {
                             rs.next();

@@ -1,3 +1,4 @@
+<%@page import="es.ulpgc.ratingames.model.Admin"%>
 <%@page import="es.ulpgc.ratingames.model.Player"%>
 <%@page import="es.ulpgc.ratingames.model.ForumUser"%>
 <%@page import="java.sql.ResultSet" %>
@@ -50,7 +51,7 @@
                 }
                 session.setAttribute("pageMessages", actualPage);
                 
-                sql = "SELECT M.id, M.body, M.date, U.username "
+                sql = "SELECT M.id, M.body, M.date, M.userId, U.username "
                         + "FROM message M, user U "
                         + "WHERE M.discussionId = '" + discussionID + "' "
                         + "AND M.userId = U.id";
@@ -74,6 +75,8 @@
                     + "<th><h2>Usuario</h2></th>");
                 if(user instanceof Player)
                     out.println("<th></th>");
+                if(user instanceof ForumUser)
+                    out.println("<th></th>");
                 out.println("</tr>");
 
                 int maxReg = regs;
@@ -94,11 +97,36 @@
                         if(user instanceof Player){
                             out.println("<td>"
                                     + "<form action=\"ResponseMessage.jsp\">"
-                                    + "<input type=\"hidden\" value=\"" + messageID + "\" name=\"menssajeID\"/>"
+                                    + "<input type=\"hidden\" value=\"" + messageID + "\" name=\"messageID\"/>"
                                     + "<input type=\"hidden\" value=\"" + discussionID + "\" name=\"discussion\"/>"
                                     + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
                                     + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
                                     + "<input type=\"submit\" value=\"Responder\">"
+                                    + "</form>"
+                                + "</td>");
+                            if(rs.getInt("userId") == user.getId()){
+                                out.println("<td>"
+                                        + "<form action=\"DeleteMessage.jsp\">"
+                                        + "<input type=\"hidden\" value=\"" + messageID + "\" name=\"messageID\"/>"
+                                        + "<input type=\"hidden\" value=\"" + discussionID + "\" name=\"discussion\"/>"
+                                        + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
+                                        + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
+                                        + "<input type=\"submit\" value=\"Borrar\">"
+                                        + "</form>"
+                                    + "</td>");
+                            }else{
+                                 out.println("<td>-</td>");
+                            }
+                        }
+                        
+                        if(user instanceof Admin){
+                            out.println("<td>"
+                                    + "<form action=\"DeleteMessage.jsp\">"
+                                    + "<input type=\"hidden\" value=\"" + messageID + "\" name=\"messageID\"/>"
+                                    + "<input type=\"hidden\" value=\"" + discussionID + "\" name=\"discussion\"/>"
+                                    + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
+                                    + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
+                                    + "<input type=\"submit\" value=\"Borrar\">"
                                     + "</form>"
                                 + "</td>");
                         }
@@ -138,6 +166,7 @@
                     }
                     out.println("</div>"
                             + "<div class=\"forumBack\">");
+                    
                     if (user instanceof ForumUser) {
                         out.println("<form action=\"sendMessage.jsp\">"
                                 + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"

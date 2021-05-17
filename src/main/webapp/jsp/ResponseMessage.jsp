@@ -8,7 +8,7 @@
     User user = (User) session.getAttribute("User");
     String gameID = request.getParameter("gameID");
     String pltName = request.getParameter("platformName");
-    String menssajeID = request.getParameter("menssajeID");
+    String messageID = request.getParameter("messageID");
     String discussionID = request.getParameter("discussion");
     
     %>
@@ -18,7 +18,7 @@
         <input type="hidden" name="gameID" value="<%=gameID%>">
         <input type="hidden" name="platformName" value="<%=pltName%>">
         <input type="hidden" name="discussion" value="<%=discussionID%>">
-        <input type="hidden" name="menssajeID" value="<%=menssajeID%>">
+        <input type="hidden" name="messageID" value="<%=messageID%>">
         <label>Mensaje de respuesta</label>
         <input type="text" name="responseBody" placeholder="Respuesta" required>
         <input type="submit" value="Añadir">
@@ -30,7 +30,7 @@
         String sql = "SELECT M.id, M.body, U.username "
                         + "FROM message M, user U "
                         + "WHERE M.discussionId = '" + discussionID + "' "
-                        + "AND M.id = '" + menssajeID + "' "
+                        + "AND M.id = '" + messageID + "' "
                         + "AND M.userId = U.id";
         
         try {

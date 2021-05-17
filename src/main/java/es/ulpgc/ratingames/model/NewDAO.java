@@ -2,6 +2,8 @@ package es.ulpgc.ratingames.model;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -44,7 +46,7 @@ public class NewDAO {
     }
     public void agregar(New n){
         String sql = "INSERT INTO new(journalistId,title,body,image,date)"
-                + " VALUES (?,?,?,?,?)";
+                + " VALUES (?,?,?,?,?)";        
         try{
             Conexion con = new Conexion();
             Connection c = con.getConnection();
@@ -53,8 +55,11 @@ public class NewDAO {
             ps.setString(2, n.getTitle());
             ps.setString(3, n.getBody());
             ps.setBlob(4, n.getImage());
-            ps.setDate(5, new java.sql.Date(new java.util.Date().getTime()));           
-        }catch(SQLException e){}
+            ps.setDate(5, new java.sql.Date(new java.util.Date().getTime()));  
+            ps.executeUpdate();
+        }catch(SQLException e){
+            System.out.println(e);
+        }
     }
     public void eliminar(int newId){
         String sql = "DELETE FROM new WHERE id="+ newId;

@@ -33,16 +33,8 @@ public class Controller extends HttpServlet {
         
         String accion = request.getParameter("accion");
         switch(accion){
-                
-            case "Regresar":
-                System.out.println("REGRESAR");
-                request.getRequestDispatcher("index.jsp").forward(request, response);
-                break;
-                
-            case "Guardar":
-                System.out.println("GUARDAR");
 
-                System.out.println("1");
+            case "Guardar":
                 String titulo = request.getParameter("txtNom");
                 Integer idJournalist = Integer.parseInt(request.getParameter("journalistId"));
                 String body = request.getParameter("subject");
@@ -50,14 +42,15 @@ public class Controller extends HttpServlet {
                 InputStream is = part.getInputStream();
                 New n = new New(0, titulo, body, idJournalist, is);
                 dao.agregar(n);
-                request.getRequestDispatcher("index.jsp").forward(request, response);
+                response.sendRedirect("jsp/addNew.jsp");
+
                 break;
                 
             case "Eliminar":
-                System.out.println("ELIMINAR");
                 Integer newId = Integer.parseInt(request.getParameter("newId"));
-                //dao.eliminar(newId);
-                response.sendRedirect("index.jsp");
+                dao.eliminar(newId);
+                response.sendRedirect("jsp/index.jsp");
+
                 break;
             default:
                 break;

@@ -9,8 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>News</title>
-
+        <title>Add New</title>
     </head>
     <body>
     <%
@@ -18,26 +17,20 @@
         ResultSet rs = s.executeQuery("SELECT id FROM journalist where userId='" + user.getId() +"'"); 
         rs.next();
         int journalistId = rs.getInt("id");
-
-        
     %>
-        <center>
-           <div> 
-               <h2>Nueva Noticia</h2>
+        <div class="rating">
+            <form class="form" action="../Controller" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="journalistId" value="<%= journalistId %>">
+                <label>Titulo</label>
+                <input type="text" name="txtNom" required>
+                <label>Imagen</label>
+                <input type="file" name="fileFoto" required>
+                <textarea id="subject" name="subject" placeholder="Escribe tu noticia" style="height:200px" required></textarea>
+                <input type="submit" name="accion" value="Guardar">
+            </form>
+            <form class="form" action="index.jsp" method="POST">
+                <input type="submit" name="accion" value="Regresar">
+            </form>       
         </div>
-        <form  action="../Controller" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="journalistId" value="<%= journalistId %>">
-            <h2>Titulo</h2>
-            <input type="text" name="txtNom" required>
-            <h2>Imagen</h2>
-            <input type="file" name="fileFoto" required>
-            <textarea id="subject" name="subject" placeholder="Escribe tu noticia" style="height:200px" required></textarea>
-            <input type="submit" name="accion" value="Guardar">
-        </form>
-        <form  action="index.jsp" method="POST">
-            <input type="submit" name="accion" value="Regresar">
-        </form>       
-            
-        </center>
     </body>
 </html>

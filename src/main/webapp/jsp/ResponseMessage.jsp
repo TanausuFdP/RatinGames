@@ -39,8 +39,13 @@
                 rs.next();
             
             try {
+                String messageBody = rs.getString("body");
+                int responseIndex = messageBody.indexOf("Respuesta:");
+                if(responseIndex != -1){
+                    messageBody = messageBody.substring(responseIndex+10);
+                }
                 String message = "Mensaje de: " + rs.getString("username") 
-                        + "\n-\n" + rs.getString("body");
+                        + "\n-\n" + messageBody;
                 message += "\nRespuesta:\n" + responseBody;
                 Integer res = s.executeUpdate("INSERT INTO message (discussionId, userId, body, date)"
                                 + " VALUES ('" + discussionID + "', '" + user.getId() + "', '" + message + "', '" + LocalDateTime.now() + "')");

@@ -7,9 +7,7 @@
     String pltName = request.getParameter("platformName");
     String messageID = request.getParameter("messageID");
     String discussionID = request.getParameter("discussion");
-    
     if (request.getParameter("deleteMessageForm") != null) {
-        
         String sql = "DELETE FROM message "
                         + "WHERE id = " + messageID;
         try {
@@ -39,11 +37,10 @@
                         + "AND M.id = '" + messageID + "'";
         try {
             ResultSet rs = s.executeQuery(sql);
-            if(!rs.wasNull())
-                rs.next();
-            out.println("<p>Mensaje:</p>"
-                +  "<p>" + rs.getString("body") + "</p>");
-            
+            if(rs.next()){
+                out.println("<p>Mensaje:</p>"
+                    +  "<p>" + rs.getString("body") + "</p>");
+            }  
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

@@ -10,9 +10,7 @@
     String pltName = request.getParameter("platformName");
     String messageID = request.getParameter("messageID");
     String discussionID = request.getParameter("discussion");
-    
     %>
-    
     <form class="form" method="POST" action="responseMessage.jsp">
         <input type="hidden" name="addResponseForm" value="true">
         <input type="hidden" name="gameID" value="<%=gameID%>">
@@ -26,36 +24,33 @@
 <%  
     if (request.getParameter("addResponseForm") != null) {
         String responseBody = request.getParameter("responseBody");
-        
         String sql = "SELECT M.id, M.body, U.username "
                         + "FROM message M, user U "
                         + "WHERE M.discussionId = '" + discussionID + "' "
                         + "AND M.id = '" + messageID + "' "
                         + "AND M.userId = U.id";
-        
         try {
             ResultSet rs = s.executeQuery(sql);
-            if(!rs.wasNull())
-                rs.next();
-            
-            try {
-                String messageBody = rs.getString("body");
-                int responseIndex = messageBody.indexOf("Respuesta:");
-                if(responseIndex != -1){
-                    messageBody = messageBody.substring(responseIndex+10);
+            if(rs.next()){
+                try {
+                    String messageBody = rs.getString("body");
+                    int responseIndex = messageBody.indexOf("Respuesta:");
+                    if(responseIndex != -1){
+                        messageBody = messageBody.substring(responseIndex+10);
+                    }
+                    String message = "Mensaje de: " + rs.getString("username") 
+                            + "\n-\n" + messageBody;
+                    message += "\nRespuesta:\n" + responseBody;
+                    Integer res = s.executeUpdate("INSERT INTO message (discussionId, userId, body, date)"
+                                    + " VALUES ('" + discussionID + "', '" + user.getId() + "', '" + message + "', '" + LocalDateTime.now() + "')");
+                    if(res > 0)
+                        out.println("<div class=\"forumBack\">"
+                                + "<p>mensaje publicado.</p>" 
+                                + "</div>");
+                } catch (SQLException ex) {
+                    out.println("<h2 class=\"bad\">ERROR AL INSERTAR MENSAJE</h2>");
                 }
-                String message = "Mensaje de: " + rs.getString("username") 
-                        + "\n-\n" + messageBody;
-                message += "\nRespuesta:\n" + responseBody;
-                Integer res = s.executeUpdate("INSERT INTO message (discussionId, userId, body, date)"
-                                + " VALUES ('" + discussionID + "', '" + user.getId() + "', '" + message + "', '" + LocalDateTime.now() + "')");
-                if(res > 0)
-                    out.println("<div class=\"forumBack\">"
-                            + "<p>mensaje publicado.</p>" 
-                            + "</div>");
-            } catch (SQLException ex) {
-                out.println("<h2 class=\"bad\">ERROR AL INSERTAR MENSAJE</h2>");
-            }
+            }  
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

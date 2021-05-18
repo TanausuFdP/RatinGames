@@ -76,7 +76,7 @@ form {
     height: 100%;
     text-align: center;
 }
-.bad { /* Color del mensaje de error */
+.bad {
 	text-align: center;
 	width: 100%;
 	padding: 12px;
@@ -84,7 +84,7 @@ form {
 	color: #fff
 }
 
-.good { /* Color del mensaje de error */
+.good {
 	text-align: center;
 	width: 100%;
 	padding: 12px;

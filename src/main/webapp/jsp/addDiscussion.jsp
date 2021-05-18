@@ -23,7 +23,6 @@
     if (request.getParameter("addDiscussionForm") != null) {
         String subject = request.getParameter("subject");
         String body = request.getParameter("body");
-        
         String insertDiscussion = String.format("INSERT INTO discussion (gameId, userId, subject)"
                 + " VALUES (%d,%d,'%s')", Integer.parseInt(gameID), user.getId(), subject);
         try {
@@ -31,26 +30,23 @@
         } catch (SQLException ex) {
             out.println("<h2 class=\"bad\">ERROR AL INSERTAR DISCUSIÓN</h2>");
         }
-        
         String sql = "SELECT D.id "
                 + "FROM discussion D "
                 + "WHERE D.gameId = '" + gameID + "' "
                 + "AND D.subject = '" + subject + "'";
-        
         try {
             ResultSet rs = s.executeQuery(sql);
-            if(!rs.wasNull())
-                rs.next();
-            
-            try {
-                Integer res = s.executeUpdate("INSERT INTO message (discussionId, userId, body, date)"
-                                + " VALUES ('" + rs.getInt("id") + "', '" + user.getId() + "', '" + body + "', '" + LocalDateTime.now() + "')");
-                if(res > 0)
-                    out.println("<div class=\"forumBack\">"
-                            + "<p>Discusión publicada.</p>" 
-                            + "</div>");
-            } catch (SQLException ex) {
-                out.println("<h2 class=\"bad\">ERROR AL INSERTAR MENSAJE</h2>");
+            if(rs.next()){
+                try {
+                    Integer res = s.executeUpdate("INSERT INTO message (discussionId, userId, body, date)"
+                                    + " VALUES ('" + rs.getInt("id") + "', '" + user.getId() + "', '" + body + "', '" + LocalDateTime.now() + "')");
+                    if(res > 0)
+                        out.println("<div class=\"forumBack\">"
+                                + "<p>Discusión publicada.</p>" 
+                                + "</div>");
+                } catch (SQLException ex) {
+                    out.println("<h2 class=\"bad\">ERROR AL INSERTAR MENSAJE</h2>");
+                }
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

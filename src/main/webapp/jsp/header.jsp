@@ -12,7 +12,7 @@
             <a class="topBarLink">JUEGOS</a>
             <a href="news.jsp" class="topBarLink">NOTICIAS</a>
             <a class="topBarLink">FORO</a>
-            <a class="topBarLink">CONTACTO</a>
+            <a href="contact.jsp" class="topBarLink">CONTACTO</a>
             <a href="login.jsp"><img src="../css-files/images/login.png"></a>
             <form action="resultOfSearchGames.jsp" class="topBarForm" method="get">
                 <input type=text placeholder="Buscar juegos" name="search_games">

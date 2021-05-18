@@ -12,12 +12,12 @@
         <title>Add New</title>
     </head>
     <body>
-    <%
+        <%
         User user = (User) session.getAttribute("User");
         ResultSet rs = s.executeQuery("SELECT id FROM journalist where userId='" + user.getId() +"'"); 
         rs.next();
         int journalistId = rs.getInt("id");
-    %>
+        %>
         <div class="rating">
             <form class="form" action="../Controller" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="journalistId" value="<%= journalistId %>">

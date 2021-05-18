@@ -76,7 +76,6 @@
     <h3>ÚLTIMAS DISCUSIONES DEL FORO</h3>
     <%
         sql = "SELECT * FROM discussion";
-
         out.println("<ul>");
         try {
             rs = s.executeQuery(sql);

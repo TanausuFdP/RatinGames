@@ -2,8 +2,6 @@ package es.ulpgc.ratingames.model;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -14,10 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.servlet.http.HttpServletResponse;
-/**
- *
- * @author yusef
- */
 public class NewDAO {    
     ResultSet rs;
     public void listarIMG(int idNew, HttpServletResponse response){

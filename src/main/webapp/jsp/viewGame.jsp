@@ -80,10 +80,35 @@
                 media += Float.parseFloat(rs.getString("rating"));
             }
             media = media / n;
-            out.println("<li><b>Valoración: </b>" + format.format(media) + "</li>"
+            out.println("<li><b>Valoración: </b>" + format.format(media) + "</li>");
+        }else{
+            out.println("<li><b>Valoración: </b>" + "-" + "</li>");
+        }
+        
+        sql = "SELECT  rating "
+                + "FROM rating "
+                + "WHERE ratingType = 1 "
+                + "AND gameId = '" + idGame + "'";
+
+        rs = s.executeQuery(sql);
+        separadoresPersonalizados = new DecimalFormatSymbols();
+        separadoresPersonalizados.setDecimalSeparator('.');
+        format = new DecimalFormat("#.##");
+
+        media = 0;
+        n = 0;
+        if(rs.next()){
+            n++;
+            media += Float.parseFloat(rs.getString("rating"));
+            while (rs.next()) {
+                n++;
+                media += Float.parseFloat(rs.getString("rating"));
+            }
+            media = media / n;
+            out.println("<li><b>Nota media de prensa: </b>" + format.format(media) + "</li>"
                     + "</ul>");
         }else{
-            out.println("<li><b>Valoración: </b>" + "-" + "</li>"
+            out.println("<li><b>Nota media de prensa: </b>" + "-" + "</li>"
                     + "</ul>");
         }
     %>

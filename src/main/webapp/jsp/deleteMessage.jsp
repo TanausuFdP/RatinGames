@@ -23,7 +23,7 @@
         }
     }else {
         %>
-        <form class="form" method="DELETE" action="DeleteMessage.jsp">
+        <form class="form" method="DELETE" action="deleteMessage.jsp">
             <input type="hidden" name="deleteMessageForm" value="true">
             <input type="hidden" name="gameID" value="<%=gameID%>">
             <input type="hidden" name="platformName" value="<%=pltName%>">

@@ -96,7 +96,7 @@
                         
                         if(user instanceof Player){
                             out.println("<td>"
-                                    + "<form action=\"ResponseMessage.jsp\">"
+                                    + "<form action=\"responseMessage.jsp\">"
                                     + "<input type=\"hidden\" value=\"" + messageID + "\" name=\"messageID\"/>"
                                     + "<input type=\"hidden\" value=\"" + discussionID + "\" name=\"discussion\"/>"
                                     + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
@@ -106,7 +106,7 @@
                                 + "</td>");
                             if(rs.getInt("userId") == user.getId()){
                                 out.println("<td>"
-                                        + "<form action=\"DeleteMessage.jsp\">"
+                                        + "<form action=\"deleteMessage.jsp\">"
                                         + "<input type=\"hidden\" value=\"" + messageID + "\" name=\"messageID\"/>"
                                         + "<input type=\"hidden\" value=\"" + discussionID + "\" name=\"discussion\"/>"
                                         + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
@@ -121,7 +121,7 @@
                         
                         if(user instanceof Admin){
                             out.println("<td>"
-                                    + "<form action=\"DeleteMessage.jsp\">"
+                                    + "<form action=\"deleteMessage.jsp\">"
                                     + "<input type=\"hidden\" value=\"" + messageID + "\" name=\"messageID\"/>"
                                     + "<input type=\"hidden\" value=\"" + discussionID + "\" name=\"discussion\"/>"
                                     + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"

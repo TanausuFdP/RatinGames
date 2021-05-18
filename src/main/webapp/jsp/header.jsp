@@ -10,7 +10,7 @@
         <div class="topBar">
             <p><a href="index.jsp" class="topBarLogo">Ratin'Games</a></p>
             <a class="topBarLink">JUEGOS</a>
-            <a href="" class="topBarLink">NOTICIAS</a>
+            <a href="news.jsp" class="topBarLink">NOTICIAS</a>
             <a class="topBarLink">FORO</a>
             <a class="topBarLink">CONTACTO</a>
             <a href="login.jsp"><img src="../css-files/images/login.png"></a>
@@ -18,12 +18,11 @@
                 <input type=text placeholder="Buscar juegos" name="search_games">
             </form>
            <img src="../css-files/images/search.png" class="topBarSearch">
-
             <%
                 if (session.getAttribute("User") != null) {
                     User user = (User) session.getAttribute("User");
                     if (user instanceof Admin) {
-                        out.println("<a href=\"addGame.jsp\" class=\"topBarLink\" id=\"topBarLink1\">AÑADIR JUEGO</a>");
+                        out.println("<a href=\"addGame.jsp\" class=\"topBarLink\">AÑADIR JUEGO</a>");
                     }
                 }
             %>

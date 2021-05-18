@@ -10,7 +10,7 @@
         <div class="topBar">
             <p><a href="index.jsp" class="topBarLogo">Ratin'Games</a></p>
             <a class="topBarLink">JUEGOS</a>
-            <a class="topBarLink">NOTICIAS</a>
+            <a href="" class="topBarLink">NOTICIAS</a>
             <a class="topBarLink">FORO</a>
             <a class="topBarLink">CONTACTO</a>
             <a href="login.jsp"><img src="../css-files/images/login.png"></a>

@@ -1,3 +1,4 @@
+<%@page import="es.ulpgc.ratingames.model.Journalist"%>
 <%@page import="es.ulpgc.ratingames.model.Admin"%>
 <%@page import="java.sql.SQLException" %>
 <%@page import="java.sql.DriverManager" %>
@@ -79,10 +80,11 @@
         try {
             if (rs.next()) {
                 User user = null;
-                if(rs.getString("username").equals("admin")){
+                if(rs.getString("username").contains("periodista")){
+                    user = new Journalist(rs.getInt("Id"), rs.getString("username"), rs.getString("password"), rs.getString("email"));
+                }else if(rs.getString("username").equals("admin")){
                     user = new Admin(rs.getInt("Id"), rs.getString("username"), rs.getString("password"), rs.getString("email"));
                 }else{
-                    
                     user = new Player(rs.getInt("Id"), rs.getString("username"), rs.getString("password"), rs.getString("email"));
                 }
                 session.setAttribute("User", user);

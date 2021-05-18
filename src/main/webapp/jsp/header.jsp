@@ -18,12 +18,11 @@
                 <input type=text placeholder="Buscar juegos" name="search_games">
             </form>
            <img src="../css-files/images/search.png" class="topBarSearch">
-
             <%
                 if (session.getAttribute("User") != null) {
                     User user = (User) session.getAttribute("User");
                     if (user instanceof Admin) {
-                        out.println("<a href=\"addGame.jsp\" class=\"topBarLink\" id=\"topBarLink1\">AÑADIR JUEGO</a>");
+                        out.println("<a href=\"addGame.jsp\" class=\"topBarLink\" id=\"topBarLink1\">AÃ‘ADIR JUEGO</a>");
                     }
                 }
             %>

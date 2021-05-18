@@ -1,5 +1,7 @@
-<%@page import="java.sql.ResultSet" %>
+<%@page import="es.ulpgc.ratingames.model.Admin"%>
 <%@page import="es.ulpgc.ratingames.model.Player"%>
+<%@page import="es.ulpgc.ratingames.model.ForumUser"%>
+<%@page import="java.sql.ResultSet" %>
 <%@page import="es.ulpgc.ratingames.model.User"%>
 <jsp:include page="header.jsp"/>
 <%@include file="BBDDConnection.jsp"%>
@@ -49,9 +51,11 @@
                 }
                 session.setAttribute("pageMessages", actualPage);
                 
-                sql = "SELECT * "
-                        + "FROM message M "
-                        + "WHERE M.discussionId = '" + discussionID + "'";
+                sql = "SELECT M.id, M.body, M.date, M.userId, U.username "
+                        + "FROM message M, user U "
+                        + "WHERE M.discussionId = '" + discussionID + "' "
+                        + "AND M.userId = U.id";
+                
                 rs = s.executeQuery(sql);
 
                 int minReg = 1 + (regsPerPage * actualPage);
@@ -63,12 +67,17 @@
                 } catch (SQLException exc) {
                     exc.printStackTrace();
                 }
-
+                
                 out.println("<table class=\"searchGamesTable\">"
-                        + "<tr>"
-                        + "<th><h2>Mensaje</h2></th>"
-                        + "<th><h2>Fecha</h2></th>"
-                        + "</tr>");
+                    + "<tr>"
+                    + "<th><h2>Mensaje</h2></th>"
+                    + "<th><h2>Fecha</h2></th>"
+                    + "<th><h2>Usuario</h2></th>");
+                if(user instanceof Player)
+                    out.println("<th></th>");
+                if(user instanceof ForumUser)
+                    out.println("<th></th>");
+                out.println("</tr>");
 
                 int maxReg = regs;
                 if ((regsPerPage * actualPage) + regsPerPage < regs) {
@@ -79,10 +88,49 @@
                     while (minReg <= maxReg) {
                         String messageID = rs.getString("id");
                         session.setAttribute("messageID", messageID);
-
+                        
                         out.println("<tr>"
-                                + "<td>" + rs.getString("body") + "</td>"
-                                + "<td>" + rs.getString("date") + "</td>");
+                            + "<td>" + rs.getString("body") + "</td>"
+                            + "<td>" + rs.getString("date") + "</td>"
+                            + "<td>" + rs.getString("username") + "</td>");
+                        
+                        if(user instanceof Player){
+                            out.println("<td>"
+                                    + "<form action=\"ResponseMessage.jsp\">"
+                                    + "<input type=\"hidden\" value=\"" + messageID + "\" name=\"messageID\"/>"
+                                    + "<input type=\"hidden\" value=\"" + discussionID + "\" name=\"discussion\"/>"
+                                    + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
+                                    + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
+                                    + "<input type=\"submit\" value=\"Responder\">"
+                                    + "</form>"
+                                + "</td>");
+                            if(rs.getInt("userId") == user.getId()){
+                                out.println("<td>"
+                                        + "<form action=\"DeleteMessage.jsp\">"
+                                        + "<input type=\"hidden\" value=\"" + messageID + "\" name=\"messageID\"/>"
+                                        + "<input type=\"hidden\" value=\"" + discussionID + "\" name=\"discussion\"/>"
+                                        + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
+                                        + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
+                                        + "<input type=\"submit\" value=\"Borrar\">"
+                                        + "</form>"
+                                    + "</td>");
+                            }else{
+                                 out.println("<td>-</td>");
+                            }
+                        }
+                        
+                        if(user instanceof Admin){
+                            out.println("<td>"
+                                    + "<form action=\"DeleteMessage.jsp\">"
+                                    + "<input type=\"hidden\" value=\"" + messageID + "\" name=\"messageID\"/>"
+                                    + "<input type=\"hidden\" value=\"" + discussionID + "\" name=\"discussion\"/>"
+                                    + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
+                                    + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
+                                    + "<input type=\"submit\" value=\"Borrar\">"
+                                    + "</form>"
+                                + "</td>");
+                        }
+                        out.println("</tr>");
 
                         if (minReg != maxReg) {
                             rs.next();
@@ -118,7 +166,8 @@
                     }
                     out.println("</div>"
                             + "<div class=\"forumBack\">");
-                    if (user instanceof Player) {
+                    
+                    if (user instanceof ForumUser) {
                         out.println("<form action=\"sendMessage.jsp\">"
                                 + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
                                 + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"

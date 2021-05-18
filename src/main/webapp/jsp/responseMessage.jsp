@@ -13,7 +13,7 @@
     
     %>
     
-    <form class="form" method="POST" action="ResponseMessage.jsp">
+    <form class="form" method="POST" action="responseMessage.jsp">
         <input type="hidden" name="addResponseForm" value="true">
         <input type="hidden" name="gameID" value="<%=gameID%>">
         <input type="hidden" name="platformName" value="<%=pltName%>">

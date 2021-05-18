@@ -22,7 +22,7 @@
                 if (session.getAttribute("User") != null) {
                     User user = (User) session.getAttribute("User");
                     if (user instanceof Admin) {
-                        out.println("<a href=\"addGame.jsp\" class=\"topBarLink\" id=\"topBarLink1\">AÃ‘ADIR JUEGO</a>");
+                        out.println("<a href=\"addGame.jsp\" class=\"topBarLink\">AÑADIR JUEGO</a>");
                     }
                 }
             %>

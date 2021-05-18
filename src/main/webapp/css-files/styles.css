@@ -60,6 +60,7 @@ small{
 }
 
 .topBar .topBarLink{
+    font-size: 9pt;
     color: #E0FBFC;
     float:left;
     text-decoration: none;
@@ -68,12 +69,6 @@ small{
     display: block;
     height: 40pt;
     width: 6%;
-}
-
-#topBarLink1{
-    width: 8%;
-    font-size: 8pt;
-    padding-top: 16pt;
 }
 
 .topBar .topBarLink:hover{
@@ -440,6 +435,7 @@ small{
 }
 
 .forumBack{
+    text-align: center;
     width: 30%;
     float: left;
     margin-top: 40pt;

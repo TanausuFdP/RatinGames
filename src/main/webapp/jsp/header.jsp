@@ -24,6 +24,9 @@
                     if (user instanceof Admin) {
                         out.println("<a href=\"addGame.jsp\" class=\"topBarLink\">AÑADIR JUEGO</a>");
                     }
+                    out.println("<a class=\"topBarLink\">"
+                            + user.getUsername()
+                            + "</a>");
                 }
             %>
         </div>

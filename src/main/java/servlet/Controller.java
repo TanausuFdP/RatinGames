@@ -4,7 +4,6 @@ import es.ulpgc.ratingames.model.New;
 import es.ulpgc.ratingames.model.NewDAO;
 import java.io.IOException;
 import java.io.InputStream;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -35,7 +34,7 @@ public class Controller extends HttpServlet {
                 InputStream is = part.getInputStream();
                 New n = new New(0, titulo, body, idJournalist, is);
                 dao.agregar(n);
-                response.sendRedirect("jsp/addNew.jsp");
+                response.sendRedirect("jsp/news.jsp");
                 break;
             case "Eliminar":
                 Integer newId = Integer.parseInt(request.getParameter("newId"));

@@ -1,3 +1,5 @@
+<%@page import="es.ulpgc.ratingames.model.User"%>
+<%@page import="es.ulpgc.ratingames.model.Journalist"%>
 <%@page import="java.sql.ResultSet"%>
 <jsp:include page="header.jsp"/>
 <%@include file="BBDDConnection.jsp"%>
@@ -11,6 +13,14 @@
 </div>
 
 <% 
+    User user = (User) session.getAttribute("User");
+    if(user instanceof Journalist){
+        out.println("<div class=\"rating\">"
+                + "<form action=\"addNew.jsp\" method=\"post\">"
+                + "<input type=\"submit\" value=\"Publicar Noticia\">"
+                + "</form>"
+                + "</div>"); 
+    }
     if(request.getParameter("searchNews") != null){
 %>
 <div class="results">

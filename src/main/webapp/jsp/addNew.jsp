@@ -28,7 +28,7 @@
                 <textarea id="subject" name="subject" placeholder="Escribe tu noticia" style="height:200px" required></textarea>
                 <input type="submit" name="accion" value="Guardar">
             </form>
-            <form class="form" action="index.jsp" method="POST">
+            <form class="form" action="news.jsp" method="POST">
                 <input type="submit" name="accion" value="Regresar">
             </form>       
         </div>

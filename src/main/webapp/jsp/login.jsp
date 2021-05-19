@@ -117,7 +117,6 @@
         try{
             ResultSet rs = s.executeQuery(sql);
             if(rs.next()){
-                System.out.println("DENTRO");
                 try{
                     Integer rs2 = s.executeUpdate("INSERT INTO player (userId)"
                              + " VALUES ('" + rs.getInt("id") + "')");
@@ -125,11 +124,11 @@
                         out.println("<h1 class=\"good\">Usuario registrado con éxito.</h1>");
 
                 }catch (SQLException ex) {
-                    out.println("<h2 class=\"bad\">ERROR EN LA TABLA PLAYER</h2>");
+                    out.println("<h2 class=\"bad\">ERROR AL AÑADIR USUARIO</h2>");
                 }
             }
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            out.println("<h2 class=\"bad\">ERROR AL AÑADIR USUARIO</h2>");
         }
     }
     try {

@@ -14,7 +14,7 @@
             <a class="topBarLink">FORO</a>
             <a href="contact.jsp" class="topBarLink">CONTACTO</a>
             <a href="login.jsp"><img src="../css-files/images/login.png"></a>
-            <form action="resultOfSearchGames.jsp" class="topBarForm" method="get">
+            <form action="SearchGames.jsp" class="topBarForm" method="get">
                 <input type=text placeholder="Buscar juegos" name="search_games">
             </form>
            <img src="../css-files/images/search.png" class="topBarSearch">

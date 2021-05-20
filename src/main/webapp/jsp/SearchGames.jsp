@@ -6,7 +6,6 @@
     <%        
         String search = request.getParameter("search_games").toLowerCase();
         String sql = "SELECT * FROM game WHERE game.title LIKE '%" + search + "%'";
-
         ResultSet rs = null;
         Statement aux = null;
         try {
@@ -16,9 +15,7 @@
             exc.printStackTrace();
         }
     %>
-
     <h1>RESULTADOS</h1>
-
     <%
         out.println("<table class=\"searchGamesTable\">"
                 + "<tr>"
@@ -32,7 +29,6 @@
                 out.println("<tr>"
                         + "<td>" + rs.getString("title") + "</td>"
                         + "<td>" + rs.getString("studio") + "</td>");
-
                 String platId = (String) rs.getString("platformId");
                 sql = "SELECT  name "
                         + "from  platform "
@@ -44,7 +40,6 @@
                 out.println(""
                         + "<td><form action=\"viewGame.jsp\">"
                         + "<input type=\"hidden\" value=\"" + rs.getInt("id") + "\" name=\"gameID\"/>"
-                        + "<input type=\"hidden\" value=\"" + rs1.getString("name") + "\" name=\"platformName\"/>"
                         + "<input type=\"submit\" value=\"Ver juego\">"
                         + "</form></td>"
                         + "</tr>");

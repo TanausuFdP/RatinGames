@@ -21,36 +21,28 @@
     </div>
     <%
         out.println("<table>");
+        int i = 0;
         try {
-            int i = 0;
-            while (rs.next()) {
-                if (i >= 8) {
-                    break;
+            while (rs.next() && i < 8) {
+                i++;
+                if(i%2!=0){
+                    out.println("<tr>");
                 }
-                out.println("<tr>");
                 out.println("<td><a href=\"viewNew.jsp?newId="+ rs.getInt("id") +"\"><img src=\"../Controller?id="+ rs.getInt("id") +"\" width=\"45%\">");
                 out.println("<h3>" + rs.getString("title") + "</h3></td>");
-                rs.next();
-                out.println("<td><a href=\"viewNew.jsp?newId="+ rs.getInt("id") +"\"><img src=\"../Controller?id="+ rs.getInt("id") +"\" width=\"45%\">");
-                out.println("<h3>" + rs.getString("title") + "</h3></td>");
-                out.println("</tr>");
-                i+=2;
+                if(i%2==0){
+                    out.println("</tr>");
+                }
             }
-            for (int j = i; j < 8; j++) {
+        } catch (SQLException exc) {}
+        for (int j = i; j < 8;) {
+            j++;
+            if(j%2!=0){
                 out.println("<tr>");
-                out.println("<td><img src=\"" + news_image + "\">");
-                out.println("<p><b>" + title + "</b></p></td>");
-                out.println("<td><img src=\"" + news_image + "\">");
-                out.println("<p><b>" + title + "</b></p></td>");
-                out.println("</tr>");
             }
-        } catch (SQLException exc) {
-            for (int i = 0; i < 8; i++) {
-                out.println("<tr>");
-                out.println("<td><img src=\"" + news_image + "\">");
-                out.println("<p><b>" + title + "</b></p></td>");
-                out.println("<td><img src=\"" + news_image + "\">");
-                out.println("<p><b>" + title + "</b></p></td>");
+            out.println("<td><img src=\"" + news_image + "\">");
+            out.println("<p><b>" + title + "</b></p></td>");
+            if(j%2==0){
                 out.println("</tr>");
             }
         }
@@ -66,7 +58,7 @@
         try {
 
             rs = s.executeQuery(sql);
-            int i = 0;
+            i = 0;
             while (rs.next()) {
                 if (i >= 5) {
                     break;
@@ -86,7 +78,7 @@
                 out.println("</tr>");
             }
         } catch (SQLException exc) {
-            for (int i = 0; i < 5; i++) {
+            for (i = 0; i < 5; i++) {
                 out.println("<tr>");
                 out.println("<td><img src=\"" + game_image + "\"></td>");
                 out.println("<td><p><b>" + title + "</b></p>");
@@ -104,7 +96,7 @@
         out.println("<ul>");
         try {
             rs = s.executeQuery(sql);
-            int i = 0;
+            i = 0;
             while (rs.next()) {
                 if (i >= 5) {
                     break;
@@ -116,7 +108,7 @@
                 out.println("<li><p><b>" + title + "</b></p></li>");
             }
         } catch (SQLException exc) {
-            for (int i = 0; i < 5; i++) {
+            for (i = 0; i < 5; i++) {
                 out.println("<li><p><b>" + title + "</b></p></li>");
             }
         }

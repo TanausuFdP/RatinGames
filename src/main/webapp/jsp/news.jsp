@@ -10,19 +10,18 @@
         <input type="text" placeholder="Buscar noticias..." name="searchNews">
         <input type="submit" value="Buscar">
     </form>
+        <% 
+            User user = (User) session.getAttribute("User");
+            if(user instanceof Journalist){
+                out.println("<h2><br>Publicar noticia</h2>" 
+                        + "<form  action=\"addNew.jsp\" method=\"post\">"
+                        + "<input type=\"submit\" value=\"Publicar Noticia\">"
+                        + "</form>");
+            }
+            if(request.getParameter("searchNews") != null){
+        %>
 </div>
 
-<% 
-    User user = (User) session.getAttribute("User");
-    if(user instanceof Journalist){
-        out.println("<div class=\"rating\">"
-                + "<form action=\"addNew.jsp\" method=\"post\">"
-                + "<input type=\"submit\" value=\"Publicar Noticia\">"
-                + "</form>"
-                + "</div>"); 
-    }
-    if(request.getParameter("searchNews") != null){
-%>
 <div class="results">
 <table class="searchGamesTable">
     <tr>

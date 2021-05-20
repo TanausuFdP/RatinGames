@@ -4,12 +4,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Contacto</title>
-        <link rel="stylesheet" href="../css-files/contact.css">
+        <link rel="stylesheet" href="../css-files/styles.css">
     </head>
     <body>
         <%@include file="header.jsp"%>
         <h3>Formulario de contacto</h3>
-        <div class="container">
+        <div class="rating">
             <form action="contact.jsp" method="POST" >
                 <label for="fname">Nombre</label>
                 <input type="text" id="fname" name="firstname" required>

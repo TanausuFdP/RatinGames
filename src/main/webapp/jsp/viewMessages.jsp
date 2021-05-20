@@ -155,7 +155,7 @@
                                 + "</form>");
                     }
                     out.println("<p>Pagina actual: <b>" + (actualPage + 1) + "</b></p>");
-                    if (actualPage != maxPages - 1) {
+                    if (actualPage != maxPages - 1 && maxReg != 0) {
                         out.println("<form action=\"viewMessages.jsp\">"
                                 + "<input type=\"hidden\" value=\"" + discussionID + "\" name=\"discussion\"/>"
                                 + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"

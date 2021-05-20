@@ -98,7 +98,7 @@
                                 + "</form>");
                     }
                     out.println("<p>Pagina actual: <b>" + (actualPage + 1) + "</b></p>");
-                    if (actualPage != maxPages - 1) {
+                    if (actualPage != maxPages - 1 && maxReg != 0) {
                         out.println("<form action=\"forum.jsp\">"
                                 + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
                                 + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"

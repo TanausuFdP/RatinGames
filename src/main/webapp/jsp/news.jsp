@@ -78,6 +78,7 @@
             exc.printStackTrace();
         }
         
+        int maxReg = 0;
         try {
             int minReg = 1 + (10 * actualPage);
             rs.next();
@@ -85,7 +86,7 @@
                 rs.next();
             }
 
-            int maxReg = regs;
+            maxReg = regs;
             if ((10 * actualPage) + 10 < regs) {
                 maxReg = (10 * actualPage) + 10;
             }
@@ -125,7 +126,7 @@
                                 + "</form>");
                     }
                     out.println("<p>Pagina actual: <b>" + (actualPage + 1) + "</b></p>");
-                    if (actualPage != maxPages - 1) {
+                    if (actualPage != maxPages - 1 && maxReg != 0) {
                         out.println("<form>"
                                 + "<input type=\"hidden\" value=\"" + search + "\" name=\"searchNews\"/>"
                                 + "<input type=\"hidden\" value=\"True\" name=\"siguiente\"/>"

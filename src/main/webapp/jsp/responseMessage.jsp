@@ -7,14 +7,12 @@
     <%  
     User user = (User) session.getAttribute("User");
     String gameID = request.getParameter("gameID");
-    String pltName = request.getParameter("platformName");
     String messageID = request.getParameter("messageID");
     String discussionID = request.getParameter("discussion");
     %>
     <form class="form" method="POST" action="responseMessage.jsp">
         <input type="hidden" name="addResponseForm" value="true">
         <input type="hidden" name="gameID" value="<%=gameID%>">
-        <input type="hidden" name="platformName" value="<%=pltName%>">
         <input type="hidden" name="discussion" value="<%=discussionID%>">
         <input type="hidden" name="messageID" value="<%=messageID%>">
         <label>Mensaje de respuesta</label>
@@ -57,7 +55,6 @@
     }
     out.println("<form action=\"viewMessages.jsp\">"
             + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
-            + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
             + "<input type=\"hidden\" value=\"" + discussionID + "\" name=\"discussion\"/>"
             + "<input type=\"submit\" value=\"Volver a la discusión\">"
             + "</form>");

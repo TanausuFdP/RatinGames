@@ -7,12 +7,10 @@
     <%  
     User user = (User) session.getAttribute("User");
     String gameID = request.getParameter("gameID");
-    String pltName = request.getParameter("platformName");
     %>
     <form class="form" method="POST" action="addDiscussion.jsp">
         <input type="hidden" name="addDiscussionForm" value="true">
         <input type="hidden" name="gameID" value="<%=gameID%>">
-        <input type="hidden" name="platformName" value="<%=pltName%>">
         <label>Tema</label>
         <input type="text" name="subject" placeholder="Tema" required>
         <label>Mensaje</label>
@@ -39,7 +37,10 @@
             if(rs.next()){
                 try {
                     Integer res = s.executeUpdate("INSERT INTO message (discussionId, userId, body, date)"
-                                    + " VALUES ('" + rs.getInt("id") + "', '" + user.getId() + "', '" + body + "', '" + LocalDateTime.now() + "')");
+                            + " VALUES ('" + rs.getInt("id") + "', '" 
+                            + user.getId() + "', '" 
+                            + body + "', '" 
+                            + LocalDateTime.now() + "')");
                     if(res > 0)
                         out.println("<div class=\"forumBack\">"
                                 + "<p>Discusión publicada.</p>" 
@@ -54,7 +55,6 @@
     }
     out.println("<form action=\"forum.jsp\">"
             + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
-            + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
             + "<input type=\"submit\" value=\"Volver al foro\">"
             + "</form>");
 %>

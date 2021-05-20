@@ -37,21 +37,17 @@
         String count = "SELECT COUNT(*) "
                         + "FROM `new` "
                         + "WHERE title LIKE '%" + search + "%'";
-
         ResultSet rs = s.executeQuery(count);
-
         int regs = 0;
         if(rs.next()){
             regs = rs.getInt(1);
         }
-
         int maxPages;
         if (regs % 10 == 0) {
             maxPages = regs / 10;
         } else {
             maxPages = (regs / 10) + 1;
         }
-
         Integer actualPage = (Integer) session.getAttribute("pageNews");
         if (actualPage == null) {
             actualPage = 0;
@@ -63,12 +59,10 @@
             actualPage++;
         }
         session.setAttribute("pageNews", actualPage);
-        
         String sql = "SELECT N.id, N.title, N.`date`, U.username FROM `new` N, `user` U "
                 + "WHERE N.title LIKE '%" + search + "%' AND "
                 + "U.id=(SELECT userId FROM journalist WHERE id=N.journalistId) "
                 + "ORDER BY N.`date` DESC;";
-
         rs = null;
         Statement aux = null;
         try {
@@ -77,7 +71,6 @@
         } catch (SQLException exc) {
             exc.printStackTrace();
         }
-        
         int maxReg = 0;
         try {
             int minReg = 1 + (10 * actualPage);
@@ -110,31 +103,29 @@
         } catch (SQLException exc) {
             exc.printStackTrace();
         }
-
-    
     %>
 </table>
 </div>
 
 <div class="pagination">
-                <%
-                    if (actualPage != 0) {
-                        out.println("<form>"
-                                + "<input type=\"hidden\" value=\"" + search + "\" name=\"searchNews\"/>"
-                                + "<input type=\"hidden\" value=\"True\" name=\"anterior\"/>"
-                                + "<input type=\"submit\" value=\"Anterior\">"
-                                + "</form>");
-                    }
-                    out.println("<p>Pagina actual: <b>" + (actualPage + 1) + "</b></p>");
-                    if (actualPage != maxPages - 1 && maxReg != 0) {
-                        out.println("<form>"
-                                + "<input type=\"hidden\" value=\"" + search + "\" name=\"searchNews\"/>"
-                                + "<input type=\"hidden\" value=\"True\" name=\"siguiente\"/>"
-                                + "<input type=\"submit\" value=\"Siguiente\">"
-                                + "</form>");
-                    }
-                }
-                %>
+    <%
+        if (actualPage != 0) {
+            out.println("<form>"
+                    + "<input type=\"hidden\" value=\"" + search + "\" name=\"searchNews\"/>"
+                    + "<input type=\"hidden\" value=\"True\" name=\"anterior\"/>"
+                    + "<input type=\"submit\" value=\"Anterior\">"
+                    + "</form>");
+        }
+        out.println("<p>Pagina actual: <b>" + (actualPage + 1) + "</b></p>");
+        if (actualPage != maxPages - 1 && maxReg != 0) {
+            out.println("<form>"
+                    + "<input type=\"hidden\" value=\"" + search + "\" name=\"searchNews\"/>"
+                    + "<input type=\"hidden\" value=\"True\" name=\"siguiente\"/>"
+                    + "<input type=\"submit\" value=\"Siguiente\">"
+                    + "</form>");
+        }
+    }
+    %>
 </div>
 </body>
 </html>

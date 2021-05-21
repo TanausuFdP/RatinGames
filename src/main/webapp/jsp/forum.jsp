@@ -5,9 +5,41 @@
 <%@include file="BBDDConnection.jsp"%>
 <div class="results">
             <h1>Discusiones del foro:</h1>
-            <%        
-                User user = (User) session.getAttribute("User");
+            <%
                 String gameID = request.getParameter("gameID");
+                User user = (User) session.getAttribute("User");
+                ResultSet rs;
+                if (user != null) {
+                    String favourite = request.getParameter("favourite");
+                    if ("true".equals(favourite)) {
+                        String insertFavouriteForumSql = String.format("INSERT INTO favouriteforum (gameId, userId) VALUES (%d, %d)",
+                                Integer.parseInt(gameID),user.getId());
+                        s.executeUpdate(insertFavouriteForumSql);
+                    } else if ("false".equals(favourite)) {
+                        String deleteFavouriteForumSql = String.format("DELETE FROM favouriteforum WHERE gameId = %d AND userId = %d",
+                                Integer.parseInt(gameID),user.getId());
+                        s.executeUpdate(deleteFavouriteForumSql);
+                    }
+                    String isFavouriteForumSql = "SELECT * "
+                            + "FROM favouriteforum F "
+                            + "WHERE F.userId =" + user.getId() + " AND F.gameId = " + gameID;
+                    rs = s.executeQuery(isFavouriteForumSql);
+                    if (!rs.next()) {
+                        out.println("<div class=\"forumBack\">"
+                                + "<form action=\"forum.jsp\">"
+                                + "<input type=\"hidden\" value=\"true\" name=\"favourite\"/>"
+                                + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
+                                + "<input type=\"submit\" value=\"Añadir favorito\">"
+                                + "</form></div>");
+                    } else {
+                        out.println("<div class=\"forumBack\">"
+                                + "<form action=\"forum.jsp\">"
+                                + "<input type=\"hidden\" value=\"false\" name=\"favourite\"/>"
+                                + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
+                                + "<input type=\"submit\" value=\"Quitar favorito\">"
+                                + "</form></div>");
+                    }
+                }
                 String anterior = request.getParameter("anterior");
                 String siguiente = request.getParameter("siguiente");
                 session.setAttribute("pageMessages", null);
@@ -15,9 +47,10 @@
                         + "FROM discussion D "
                         + "WHERE D.gameId = '" + gameID + "'";
 
-                ResultSet rs = s.executeQuery(sql);
+                rs = s.executeQuery(sql);
+
                 int regs = 0;
-                if(rs.next()){
+                if (rs.next()) {
                     regs = rs.getInt(1);
                 }
                 int maxPages;
@@ -40,7 +73,7 @@
                 sql = "SELECT * "
                         + "FROM discussion D "
                         + "WHERE D.gameId = '" + gameID + "'";
-                
+
                 rs = s.executeQuery(sql);
                 int minReg = 1 + (10 * actualPage);
                 rs.next();

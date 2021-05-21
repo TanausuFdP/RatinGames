@@ -1,3 +1,5 @@
+<%@page import="es.ulpgc.ratingames.model.Admin"%>
+<%@page import="es.ulpgc.ratingames.model.ForumUser"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.text.DecimalFormatSymbols"%>
 <%@page import="java.sql.ResultSet" %>
@@ -9,12 +11,12 @@
 <div class="gameView">
 
 <%      String idGame = request.getParameter("gameID");
-        String pltName = request.getParameter("platformName");
         session.setAttribute("pageForum", null);
         User user = (User) session.getAttribute("User");
-        String sql = "SELECT * "
-                + "FROM game G "
-                + "WHERE G.id = '" + idGame + "'";
+        String sql = "SELECT G.* , P.name "
+                + "FROM game G , platform P "
+                + "WHERE G.id = '" + idGame + "'"
+                + "AND P.id = G.platformId";
         ResultSet rs = null;
         try {
             rs = s.executeQuery(sql);
@@ -24,7 +26,7 @@
                 out.println("<h1>" + rs.getString("title") + "</h1>"
                         + "<ul>"
                         + "<li><b>Estudio: </b>" + rs.getString("studio") + "</li>"
-                        + "<li><b>Plataforma: </b>" + pltName + "</li>"
+                        + "<li><b>Plataforma: </b>" + rs.getString("name") + "</li>"
                         + "<li><b>Fecha de salida: </b>" + rs.getString("releaseDate") + "</li>"
                         + "<hr>"
                         + "<li><b>Idioma: </b>" + rs.getString("language") + "</li>"
@@ -71,6 +73,31 @@
 
         float media = 0;
         int n = 0;
+        if (rs.next()) {
+            n++;
+            media += Float.parseFloat(rs.getString("rating"));
+            while (rs.next()) {
+                n++;
+                media += Float.parseFloat(rs.getString("rating"));
+            }
+            media = media / n;
+            out.println("<li><b>Valoración: </b>" + format.format(media) + "</li>");
+        }else{
+            out.println("<li><b>Valoración: </b>" + "-" + "</li>");
+        }
+
+        sql = "SELECT  rating "
+                + "FROM rating "
+                + "WHERE ratingType = 1 "
+                + "AND gameId = '" + idGame + "'";
+
+        rs = s.executeQuery(sql);
+        separadoresPersonalizados = new DecimalFormatSymbols();
+        separadoresPersonalizados.setDecimalSeparator('.');
+        format = new DecimalFormat("#.##");
+
+        media = 0;
+        n = 0;
         if(rs.next()){
             n++;
             media += Float.parseFloat(rs.getString("rating"));
@@ -79,34 +106,39 @@
                 media += Float.parseFloat(rs.getString("rating"));
             }
             media = media / n;
-            out.println("<li><b>Valoración: </b>" + format.format(media) + "</li>"
+            out.println("<li><b>Nota media de prensa: </b>" + format.format(media) + "</li>"
                     + "</ul>");
         }else{
-            out.println("<li><b>Valoración: </b>" + "-" + "</li>"
+            out.println("<li><b>Nota media de prensa: </b>" + "-" + "</li>"
                     + "</ul>");
         }
     %>
 </div>
 <div class="gameButtons">
     <%
-        if (user instanceof Player) {
+        if (user instanceof ForumUser) {
             out.println("<form action=\"sendMessage.jsp\">"
                     + "<input type=\"hidden\" value=\"" + idGame + "\" name=\"gameID\"/>"
-                    + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
                     + "<input type=\"submit\" value=\"Publicar mensaje\">"
                     + "</form>");
+        }
+        if (user instanceof Player) {
             out.println("<form action=\"rating.jsp\">"
                     + "<input type=\"hidden\" value=\"" + idGame + "\" name=\"gameID\"/>"
-                    + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
                     + "<input type=\"submit\" value=\"Valorar\">"
                     + "</form>");
         }
+        if (user instanceof Admin) {
+                        out.println("<form action=\"updateGame.jsp\">"
+                    + "<input type=\"hidden\" value=\"" + idGame + "\" name=\"gameID\"/>"
+                    + "<input type=\"submit\" value=\"Modificar juego\">"
+                    + "</form>");
+
+        }
         out.println("<form action=\"forum.jsp\">"
                 + "<input type=\"hidden\" value=\"" + idGame + "\" name=\"gameID\"/>"
-                + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
                 + "<input type=\"submit\" value=\"Ver foro\">"
                 + "</form>");
-
     %>
 </div>
 </body>

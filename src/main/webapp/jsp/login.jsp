@@ -1,3 +1,4 @@
+<%@page import="es.ulpgc.ratingames.model.Journalist"%>
 <%@page import="es.ulpgc.ratingames.model.Admin"%>
 <%@page import="java.sql.SQLException" %>
 <%@page import="java.sql.DriverManager" %>
@@ -17,8 +18,6 @@
     <script src="../js-files/loginAnimation.js"></script>
 </head>
 <body>
-
-
 <div class="imgcontainer">
     <img src="../css-files/images/logo_white_large.png" alt="Avatar" class="avatar">
 </div>
@@ -53,20 +52,16 @@
         </div>
     </div>
 </div>
-
 <%@include file="BBDDConnection.jsp" %>
-
 <%
     if (session.getAttribute("User") != null) {
         session.setAttribute("User", null);
         session.setAttribute("UserID", null);
         response.sendRedirect("index.jsp");
     }
-
     String username = request.getParameter("uname");
     String password = request.getParameter("psw");
     String correo = request.getParameter("correo");
-
     if ((username != null && password != null) && correo == null) {
         ResultSet rs = null;
         try {
@@ -75,18 +70,29 @@
         } catch (SQLException exc) {
             exc.printStackTrace();
         }
-
         try {
             if (rs.next()) {
+                int id = rs.getInt("Id");
+                String nombre =rs.getString("username");
+                String pass =rs.getString("password");
+                String email =rs.getString("email");
                 User user = null;
-                if(rs.getString("username").equals("admin")){
-                    user = new Admin(rs.getInt("Id"), rs.getString("username"), rs.getString("password"), rs.getString("email"));
-                }else{
-                    
-                    user = new Player(rs.getInt("Id"), rs.getString("username"), rs.getString("password"), rs.getString("email"));
+                rs = s.executeQuery("SELECT * FROM journalist where userId=" + "'" +
+                    id + "'");
+                if(rs.next()){
+                    user = new Journalist(id,nombre,pass,email);
+                    System.out.println("PERIODISTA");
+                }else {
+                    rs = s.executeQuery("SELECT * FROM admin where userId=" + "'" +
+                    id + "'");
+                    if(rs.next()){
+                        user = new Admin(id,nombre,pass,email);
+                    }else{
+                        user = new Player(id,nombre,pass,email);
+                    }
                 }
                 session.setAttribute("User", user);
-                session.setAttribute("UserID", rs.getInt("Id"));
+                session.setAttribute("UserID", id);
                 response.sendRedirect("index.jsp");
             } else {
                 out.println("<h1 class=\"bad\">ERROR DE AUTENTIFICACION.</hi>");
@@ -95,15 +101,34 @@
             exc.printStackTrace();
         }
     }
-
     if (username != null && password != null && correo != null) {
-        try {
-            Integer rs = s.executeUpdate("INSERT INTO user (username, password, email)"
-                    + " VALUES ('" + username + "', '" + password + "', '" + correo + "')");
-            if (rs > 0) out.println("<h1 class=\"good\">Usuario registrado con éxito.</h1>");
+        String insertUser = String.format("INSERT INTO user (username, password, email)"
+                + " VALUES ('%s','%s','%s')", username, password, correo);
 
-        } catch (SQLException e) {
-            out.println("<h1 class=\"bad\">ERROR AL REGISTRAR USUARIO.</h1>");
+        try {
+            s.executeUpdate(insertUser);
+        } catch (SQLException ex) {
+            out.println("<h2 class=\"bad\">ERROR AL AÑADIR USUARIO</h2>");
+        }    
+        String sql = "SELECT id "
+                + "FROM user "
+                + "WHERE username = '" + username + "' "
+                + "AND email = '" + correo + "'";
+        try{
+            ResultSet rs = s.executeQuery(sql);
+            if(rs.next()){
+                try{
+                    Integer rs2 = s.executeUpdate("INSERT INTO player (userId)"
+                             + " VALUES ('" + rs.getInt("id") + "')");
+                    if(rs2 > 0)
+                        out.println("<h1 class=\"good\">Usuario registrado con éxito.</h1>");
+
+                }catch (SQLException ex) {
+                    out.println("<h2 class=\"bad\">ERROR AL AÑADIR USUARIO</h2>");
+                }
+            }
+        } catch (SQLException ex) {
+            out.println("<h2 class=\"bad\">ERROR AL AÑADIR USUARIO</h2>");
         }
     }
     try {
@@ -113,7 +138,5 @@
         exc.printStackTrace();
     }
 %>
-
-
 </body>
 </html>

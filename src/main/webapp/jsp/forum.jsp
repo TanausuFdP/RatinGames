@@ -29,15 +29,13 @@
                                 + "<form action=\"forum.jsp\">"
                                 + "<input type=\"hidden\" value=\"true\" name=\"favourite\"/>"
                                 + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
-                                + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
-                                + "<input type=\"submit\" value=\"Aï¿½adir favorito\">"
+                                + "<input type=\"submit\" value=\"Añadir favorito\">"
                                 + "</form></div>");
                     } else {
                         out.println("<div class=\"forumBack\">"
                                 + "<form action=\"forum.jsp\">"
                                 + "<input type=\"hidden\" value=\"false\" name=\"favourite\"/>"
                                 + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
-                                + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
                                 + "<input type=\"submit\" value=\"Quitar favorito\">"
                                 + "</form></div>");
                     }
@@ -88,8 +86,8 @@
                 }
                 out.println("<table class=\"searchGamesTable\">"
                         + "<tr>"
-                        + "<th><h2>Tï¿½tulo discusiï¿½n</h2></th>"
-                        + "<th><h2>Enlace discusiï¿½n</h2></th>"
+                        + "<th><h2>Título discusión</h2></th>"
+                        + "<th><h2>Enlace discusión</h2></th>"
                         + "</tr>");
                 while (minReg <= maxReg) {
                     String discussionID = rs.getString("id");
@@ -132,7 +130,7 @@
                     if(user instanceof Player){
                         out.println("<form action=\"addDiscussion.jsp\">"
                                 + "<input type=\"hidden\" value=\"" + gameID + "\" name=\"gameID\"/>"
-                                + "<input type=\"submit\" value=\"Aï¿½adir discusiï¿½n\">"
+                                + "<input type=\"submit\" value=\"Añadir discusión\">"
                                 + "</form>");
                     }
                     out.println("<form action=\"viewGame.jsp\">"

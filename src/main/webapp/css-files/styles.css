@@ -138,7 +138,7 @@ small{
     margin-top: 40pt;
 }
 
-.topNews p, h3{
+.topNews p, .topNews h3{
     color: white;
 }
 
@@ -229,7 +229,7 @@ small{
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
-.rating h3, h4{
+.rating h3, .rating h4{
     text-align: center;
     padding-top: 20pt;
     color: white;

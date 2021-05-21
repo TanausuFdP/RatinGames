@@ -22,7 +22,11 @@
     if (rs.next()) {
         regs = rs.getInt(1);
     }
-
+    if (regs == 0) {
+            out.println("<h3>No ha registrado ningún foro como favorito.</h3>"
+                + "<h4>Al acceder al foro de un juego, "
+                    + "podrá marcarlo como favorito y acceder rápidamente a este.</h4>");
+    }
     int maxPages;
     if (regs % 10 == 0) {
         maxPages = regs / 10;
@@ -91,7 +95,7 @@
                                 + "</form>");
                     }
                     out.println("<p>Pagina actual: <b>" + (actualPage + 1) + "</b></p>");
-                    if (actualPage != maxPages - 1) {
+                    if (actualPage != maxPages - 1 && maxReg != 0) {
                         out.println("<form action=\"favouriteForum.jsp\">"
                                 + "<input type=\"hidden\" value=\"True\" name=\"siguiente\"/>"
                                 + "<input type=\"submit\" value=\"Siguiente\">"

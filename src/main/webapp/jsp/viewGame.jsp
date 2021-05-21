@@ -131,7 +131,6 @@
         if (user instanceof Admin) {
                         out.println("<form action=\"updateGame.jsp\">"
                     + "<input type=\"hidden\" value=\"" + idGame + "\" name=\"gameID\"/>"
-                    + "<input type=\"hidden\" value=\"" + pltName + "\" name=\"platformName\"/>"
                     + "<input type=\"submit\" value=\"Modificar juego\">"
                     + "</form>");
 

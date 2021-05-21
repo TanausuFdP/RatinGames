@@ -16,7 +16,7 @@
                     User user = (User) session.getAttribute("User");
                     out.println("<a href=\"favouriteForum.jsp\" class=\"topBarLink\">FORO</a>");
                     if (user instanceof Admin) {
-                        out.println("<a href=\"addGame.jsp\" class=\"topBarLink\">Aï¿½ADIR JUEGO</a>");
+                        out.println("<a href=\"addGame.jsp\" class=\"topBarLink\">AÑADIR JUEGO</a>");
                     }
                 } else {
                     out.println("<a href=\"login.jsp\" class=\"topBarLink\">FORO</a>");

@@ -15,7 +15,7 @@
             if(user instanceof Journalist){
                 out.println("<h2><br>Publicar noticia</h2>" 
                         + "<form  action=\"addNew.jsp\" method=\"post\">"
-                        + "<input type=\"submit\" value=\"Publicar Noticia\">"
+                        + "<input type=\"submit\" value=\"Publicar\">"
                         + "</form>");
             }
             if(request.getParameter("searchNews") != null){

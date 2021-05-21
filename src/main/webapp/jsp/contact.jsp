@@ -8,8 +8,8 @@
     </head>
     <body>
         <%@include file="header.jsp"%>
-        <h3>Formulario de contacto</h3>
         <div class="rating">
+            <h3>Formulario de contacto</h3>
             <form action="contact.jsp" method="POST" >
                 <label for="fname">Nombre</label>
                 <input type="text" id="fname" name="firstname" required>
@@ -29,18 +29,18 @@
                 <label for="subject">Descripción</label>
                 <textarea id="subject" name="subject" placeholder="Descríbenos el problema" style="height:200px"></textarea>
                 <input type="hidden" name="isCorrect" value="1">
-                <input type="submit" name="accion" value="Contacto">
+                <input type="submit" name="accion" value="Enviar">
             </form>
-        </div>  
     <%
         String aux = request.getParameter("isCorrect");
         if(aux != null){
             if (!aux.equals("1")) {
-                out.println("<h2 class=\"bad\">ERROR AL ENVIAR FORMULARIO</h2>");
+                out.println("<h3 class=\"bad\">ERROR AL ENVIAR FORMULARIO</h3>");
             }else{
-                out.println("<h2 class=\"good\">EXITO AL ENVIAR FORMULARIO</h2>");
+                out.println("<h3 class=\"good\">EXITO AL ENVIAR FORMULARIO</h3>");
             }
         }
     %>
+        </div>  
     </body>
 </html>

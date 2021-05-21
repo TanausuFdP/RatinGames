@@ -10,13 +10,18 @@
     ResultSet rs = null;
 %>
 <div class="topNews">
-    <h3>TOP NOTICIAS</h3>
+    <h3>ÚLTIMAS NOTICIAS</h3>
     <div class="firstTopNew">
         <%
-            String sql = "SELECT * FROM new";
-            rs = s.executeQuery(sql);rs.next();
-            out.println("<td><a href=\"viewNew.jsp?newId="+ rs.getInt("id") +"\"><img src=\"../Controller?id="+ rs.getInt("id") +"\" width=\"45%\"></a>");
-            out.println("<h3>" + rs.getString("title") + "</h3></td><br>");
+            String sql = "SELECT * FROM new ORDER BY date DESC";
+            rs = s.executeQuery(sql);
+            if(rs.next()){
+                out.println("<td><a href=\"viewNew.jsp?newId="+ rs.getInt("id") +"\"><img src=\"../Controller?id="+ rs.getInt("id") +"\" width=\"45%\"></a>");
+                out.println("<h3>" + rs.getString("title") + "</h3></td><br>");
+            }else{
+                out.println("<td><img src=\""+ news_image +"\" width=\"45%\">");
+                out.println("<h3>" + title + "</h3></td><br>");
+            }
         %>
     </div>
     <%
@@ -50,9 +55,9 @@
     %>
 </div>
 <div class="topGames">
-    <h3>TOP JUEGOS</h3>
+    <h3>JUEGOS MÁS RECIENTES</h3>
     <%
-        sql = "SELECT * FROM game";
+        sql = "SELECT * FROM game ORDER BY releaseDate DESC";
         rs = null;
         out.println("<table>");
         try {
@@ -92,7 +97,7 @@
 <div class="topForum">
     <h3>ÚLTIMAS DISCUSIONES DEL FORO</h3>
     <%
-        sql = "SELECT * FROM discussion";
+        sql = "SELECT * FROM discussion ORDER BY id DESC";
         out.println("<ul>");
         try {
             rs = s.executeQuery(sql);

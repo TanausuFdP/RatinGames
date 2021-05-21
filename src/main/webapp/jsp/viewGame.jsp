@@ -30,7 +30,7 @@
                         + "<li><b>Fecha de salida: </b>" + rs.getString("releaseDate") + "</li>"
                         + "<hr>"
                         + "<li><b>Idioma: </b>" + rs.getString("language") + "</li>"
-                        + "<li><b>Edad mï¿½nima: </b>" + rs.getString("minimumAge") + "</li>"
+                        + "<li><b>Edad mínima: </b>" + rs.getString("minimumAge") + "</li>"
                         + "<li><b>Jugadores: </b>" + rs.getString("players") + "</li>"
                         + "<hr>");
             }
@@ -54,9 +54,9 @@
                 while (rs.next()) {
                     genres += rs.getString("name") + ", ";
                 }
-                out.println("<li><b>Gï¿½nero: </b>" + genres.substring(0, genres.lastIndexOf(",")) + "</li>");
+                out.println("<li><b>Género: </b>" + genres.substring(0, genres.lastIndexOf(",")) + "</li>");
             } else {
-                out.println("<li><b>Gï¿½nero: </b>" + "Desconocido" + "<li>");
+                out.println("<li><b>Género: </b>" + "Desconocido" + "<li>");
             }
         } catch (SQLException exc) {
             exc.printStackTrace();
@@ -81,9 +81,9 @@
                 media += Float.parseFloat(rs.getString("rating"));
             }
             media = media / n;
-            out.println("<li><b>Valoraciï¿½n: </b>" + format.format(media) + "</li>");
+            out.println("<li><b>Valoración: </b>" + format.format(media) + "</li>");
         }else{
-            out.println("<li><b>Valoraciï¿½n: </b>" + "-" + "</li>");
+            out.println("<li><b>Valoración: </b>" + "-" + "</li>");
         }
 
         sql = "SELECT  rating "

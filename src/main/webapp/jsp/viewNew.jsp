@@ -19,17 +19,20 @@
         String newId = request.getParameter("newId");
         ResultSet rs;
         try {
-            rs = s.executeQuery("select * from new where id = " + newId);
+            rs = s.executeQuery("SELECT N.*, J.id, J.userId, U.username, U.id "
+                            + "FROM new N, journalist J, user U "
+                            + "WHERE N.id = '" + newId + "' "
+                            + "AND J.id = N.journalistId "
+                            + "AND J.userId = U.id");
             if(rs.next()){
                 out.println("<div class=\"rating\" align=\"center\">");
                 out.println("<h1>"+ rs.getString("title")  +"</h1>");
                 out.println("<h2>"+ rs.getDate("date") +"</h2>");
                 out.println("<img src=\"../Controller?id="+ newId +"\" width=\"500\" height=\"400\">");
                 out.println("<p>"+ rs.getString("body")  +"</p>");
-                Integer journalId = rs.getInt("journalistId");
+                out.println("<h3> Periodista: "+ rs.getString("U.username").toUpperCase() +"</h3>");
                 if(user != null){
-                    ResultSet rs2 = s.executeQuery("select id from journalist where userId = '" + user.getId() + "'");rs2.next();
-                    if(user instanceof Admin || ( rs2.getInt("id") == journalId )) {
+                    if(user instanceof Admin || ( rs.getInt("U.id") == user.getId() )) {
                         out.println("<form action=\"../Controller\" method=\"POST\" >");
                         out.println("<input type=\"hidden\" name=\"newId\" value=\""+ newId +"\">");
                         out.println("<input type=\"submit\" name=\"accion\" value=\"Eliminar\">");

@@ -19,7 +19,7 @@ public class Controller extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        dao.listarIMG(id, response);
+        dao.mostrarIMG(id, response);
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -27,18 +27,18 @@ public class Controller extends HttpServlet {
         String accion = request.getParameter("accion");
         switch(accion){
             case "Guardar":
-                String titulo = request.getParameter("txtNom");
+                String titulo = request.getParameter("title");
                 Integer idJournalist = Integer.parseInt(request.getParameter("journalistId"));
                 String body = request.getParameter("subject");
-                Part part = request.getPart("fileFoto");
+                Part part = request.getPart("img");
                 InputStream is = part.getInputStream();
                 New n = new New(0, titulo, body, idJournalist, is);
-                dao.agregar(n);
+                dao.agregarIMG(n);
                 response.sendRedirect("jsp/news.jsp");
                 break;
             case "Eliminar":
                 Integer newId = Integer.parseInt(request.getParameter("newId"));
-                dao.eliminar(newId);
+                dao.eliminarIMG(newId);
                 response.sendRedirect("jsp/news.jsp");
                 break;
             default:

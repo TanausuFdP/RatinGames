@@ -22,9 +22,9 @@
             <form class="form" action="../Controller" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="journalistId" value="<%= journalistId %>">
                 <label>Titulo</label>
-                <input type="text" name="txtNom" required>
+                <input type="text" name="title" required>
                 <label>Imagen</label>
-                <input type="file" name="fileFoto" required>
+                <input type="file" name="img" required>
                 <textarea id="subject" name="subject" placeholder="Escribe tu noticia" style="height:200px" required></textarea>
                 <input type="submit" name="accion" value="Guardar">
             </form>

@@ -14,7 +14,7 @@ import java.sql.Statement;
 import javax.servlet.http.HttpServletResponse;
 public class NewDAO {    
     ResultSet rs;
-    public void listarIMG(int idNew, HttpServletResponse response){
+    public void mostrarIMG(int idNew, HttpServletResponse response){
         String sql ="select * from new where id = " + idNew;
         try{
             Conexion con = new Conexion();
@@ -38,7 +38,7 @@ public class NewDAO {
             }
            }catch(IOException | SQLException e){}
     }
-    public void agregar(New n){
+    public void agregarIMG(New n){
         String sql = "INSERT INTO new(journalistId,title,body,image,date)"
                 + " VALUES (?,?,?,?,?)";        
         try{
@@ -55,7 +55,7 @@ public class NewDAO {
             System.out.println(e);
         }
     }
-    public void eliminar(int newId){
+    public void eliminarIMG(int newId){
         String sql = "DELETE FROM new WHERE id="+ newId;
         try{
             Conexion con = new Conexion();

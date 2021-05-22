@@ -30,7 +30,7 @@
                     out.println("<a class=\"topBarLink\">" + user.getUsername().toUpperCase() + "</a>");
                 }
             %>
-            <form action="SearchGames.jsp" class="topBarForm" method="get">
+            <form action="searchGames.jsp" class="topBarForm" method="get">
                 <input type=text placeholder="Buscar juegos" name="search_games">
                 <input type="hidden" value="true" name="newSearch"/>
             </form>
